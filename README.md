@@ -1,14 +1,16 @@
-# PicoRuby Calculator
+# 💎 PicoRuby Calculator ✨
 
 ![Calculator Demo](image/main.jpg)
 
-Ruby REPL in your pocket! Write and execute Ruby code anywhere with this M5Stack Cardputer v1.1-powered handheld device. Features real-time code execution, syntax error detection, and battery monitoring - because why should Ruby be stuck on your desktop?
+🚀 **Ruby REPL in your pocket!** 🎒 Write and execute Ruby code **anywhere** with this M5Stack Cardputer v1.1-powered handheld device! ⚡ Features real-time code execution, syntax error detection, and battery monitoring - because why should Ruby be stuck on your desktop? 🖥️❌
 
-**Note:** This project is specifically designed for M5Stack Cardputer v1.1.
+> 📌 **Note:** This project is specifically designed for **M5Stack Cardputer v1.1** 🎮
 
-## Setup
+---
 
-### 1. Add submodules
+## 🛠️ Setup
+
+### 1️⃣ Add submodules
 
 ```bash
 git submodule add https://github.com/picoruby/picoruby-esp32.git components/picoruby-esp32
@@ -18,11 +20,11 @@ git submodule add https://github.com/kishima/picoruby-m5unified.git components/p
 git submodule update --init --recursive
 ```
 
-### 2. Update CMakeLists
+### 2️⃣ Update CMakeLists
 
-Edit `components/picoruby-esp32/CMakeLists.txt`:
+📝 Edit `components/picoruby-esp32/CMakeLists.txt`:
 
-**Add to SRCS:**
+**➕ Add to SRCS:**
 ```cmake
 ${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5unified_core.cpp
 ${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_color.cpp
@@ -35,26 +37,26 @@ ${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_text.cpp
 ${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_util.cpp
 ```
 
-**Add to INCLUDE_DIRS:**
+**➕ Add to INCLUDE_DIRS:**
 ```cmake
 ${COMPONENT_DIR}/../picoruby-m5unified/include
 ```
 
-**Add to PRIV_REQUIRES:**
+**➕ Add to PRIV_REQUIRES:**
 ```cmake
 M5Unified
 M5GFX
 ```
 
-### 3. Update build configuration
+### 3️⃣ Update build configuration
 
-Edit `components/picoruby-esp32/picoruby/build_config/xtensa-esp.rb`:
+📝 Edit `components/picoruby-esp32/picoruby/build_config/xtensa-esp.rb`:
 
 ```ruby
 conf.gem File.expand_path('../../../picoruby-m5unified', __dir__)
 ```
 
-### 4. Build and flash
+### 4️⃣ Build and flash 🔥
 
 ```bash
 . $(YOUR_ESP_IDF_PATH)/export.sh
