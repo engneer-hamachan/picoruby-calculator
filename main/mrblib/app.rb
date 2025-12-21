@@ -294,9 +294,11 @@ loop do
 
   key_input = get_input
 
-  if key_input == 'ret' && code != ''
+  if key_input == 'ret' && code != '' && !is_input
+    is_input = true
+
     code_executed = code
-    res = nil
+    res = ''
 
     unless sandbox.compile code, remove_lv: true
       res = 'syntax error'
@@ -305,16 +307,16 @@ loop do
     end
 
     sandbox.execute
-
     sandbox.wait timeout: nil
-    sandbox.suspend
 
     if sandbox.error.nil?
       res = sandbox.result
     else
-      res = sandbox.error.to_s
+      res = 'runtime error'
       sandbox = Sandbox.new ''
     end
+
+    sandbox.suspend
 
     code = ''
 
