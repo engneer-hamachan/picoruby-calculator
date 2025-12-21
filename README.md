@@ -11,20 +11,20 @@ Update CMakeLists
 # vim components/picoruby-esp32/CMakeLists.txt
 
 SRCS:
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5unified_core.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_color.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_display.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_draw.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_fill.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_image.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_lowlevel.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_text.cpp
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/ports/esp32/m5gfx_util.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5unified_core.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_color.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_display.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_draw.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_fill.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_image.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_lowlevel.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_text.cpp
+${COMPONENT_DIR}/../picoruby-m5unified/ports/esp32/m5gfx_util.cpp
 
 ...
 
 INCLUDE_DIRS:
-${COMPONENT_DIR}/picoruby/mrbgems/picoruby-m5unified/include
+${COMPONENT_DIR}/../picoruby-m5unified/include
 
 PRIV_REQUIRES:
 M5Unified
@@ -33,5 +33,13 @@ M5GFX
 
 ```text
 # vim components/picoruby-esp32/picoruby/build_config/xtensa-esp.rb
-conf.gem core: 'picoruby-m5unified'
+conf.gem File.expand_path('../../../picoruby-m5unified', __dir__)
 ```
+
+```text
+. $(YOUR_ESP_IDF_PATH)/export.sh
+idf.py set-target esp32s3
+idf.py build
+idf.py flash
+```
+
