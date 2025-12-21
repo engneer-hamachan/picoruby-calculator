@@ -90,44 +90,44 @@ SHIFT_TABLE['='] = '+'
 SHIFT_TABLE['['] = '{'
 SHIFT_TABLE[']'] = '}'
 SHIFT_TABLE[';'] = ':'
-SHIFT_TABLE["'"] = '"'
-SHIFT_TABLE[","] = '<'
-SHIFT_TABLE["."] = '>'
-SHIFT_TABLE["/"] = '?'
-SHIFT_TABLE["a"] = 'A'
-SHIFT_TABLE["b"] = 'B'
-SHIFT_TABLE["c"] = 'C'
-SHIFT_TABLE["d"] = 'D'
-SHIFT_TABLE["e"] = 'E'
-SHIFT_TABLE["f"] = 'F'
-SHIFT_TABLE["g"] = 'G'
-SHIFT_TABLE["h"] = 'H'
-SHIFT_TABLE["i"] = 'I'
-SHIFT_TABLE["j"] = 'J'
-SHIFT_TABLE["k"] = 'K'
-SHIFT_TABLE["l"] = 'L'
-SHIFT_TABLE["m"] = 'M'
-SHIFT_TABLE["n"] = 'N'
-SHIFT_TABLE["o"] = 'O'
-SHIFT_TABLE["p"] = 'P'
-SHIFT_TABLE["q"] = 'Q'
-SHIFT_TABLE["r"] = 'R'
-SHIFT_TABLE["s"] = 'S'
-SHIFT_TABLE["t"] = 'T'
-SHIFT_TABLE["u"] = 'U'
-SHIFT_TABLE["v"] = 'V'
-SHIFT_TABLE["w"] = 'W'
-SHIFT_TABLE["x"] = 'X'
-SHIFT_TABLE["y"] = 'Y'
-SHIFT_TABLE["z"] = 'Z'
+SHIFT_TABLE["'"] = "'"
+SHIFT_TABLE[','] = '<'
+SHIFT_TABLE['.'] = '>'
+SHIFT_TABLE['/'] = '?'
+SHIFT_TABLE['a'] = 'A'
+SHIFT_TABLE['b'] = 'B'
+SHIFT_TABLE['c'] = 'C'
+SHIFT_TABLE['d'] = 'D'
+SHIFT_TABLE['e'] = 'E'
+SHIFT_TABLE['f'] = 'F'
+SHIFT_TABLE['g'] = 'G'
+SHIFT_TABLE['h'] = 'H'
+SHIFT_TABLE['i'] = 'I'
+SHIFT_TABLE['j'] = 'J'
+SHIFT_TABLE['k'] = 'K'
+SHIFT_TABLE['l'] = 'L'
+SHIFT_TABLE['m'] = 'M'
+SHIFT_TABLE['n'] = 'N'
+SHIFT_TABLE['o'] = 'O'
+SHIFT_TABLE['p'] = 'P'
+SHIFT_TABLE['q'] = 'Q'
+SHIFT_TABLE['r'] = 'R'
+SHIFT_TABLE['s'] = 'S'
+SHIFT_TABLE['t'] = 'T'
+SHIFT_TABLE['u'] = 'U'
+SHIFT_TABLE['v'] = 'V'
+SHIFT_TABLE['w'] = 'W'
+SHIFT_TABLE['x'] = 'X'
+SHIFT_TABLE['y'] = 'Y'
+SHIFT_TABLE['z'] = 'Z'
 SHIFT_TABLE['\\'] = '|'
 
 FN_TABLE = {}
-FN_TABLE[";"] = 'up'
-FN_TABLE["."] = 'down'
-FN_TABLE[","] = 'left'
-FN_TABLE["/"] = 'right'
-FN_TABLE["/"] = 'right'
+FN_TABLE[';'] = 'up'
+FN_TABLE['.'] = 'down'
+FN_TABLE[','] = 'left'
+FN_TABLE['/'] = 'right'
+FN_TABLE['/'] = 'right'
 
 PATTERN = 
   [
@@ -195,36 +195,36 @@ end
 def draw_static_ui(disp)
   # Header
   disp.set_text_color 0xA800
-  disp.draw_string "+" + "-" * 38 + "+", 0, 0
+  disp.draw_string '+' + '-' * 38 + '+', 0, 0
   disp.set_text_color 0xE000
-  disp.draw_string "| ", 0, 10
+  disp.draw_string '| ', 0, 10
   disp.set_text_color 0xFFFF
-  disp.draw_string "/home/geek/picoruby/calc.rb", 12, 10
+  disp.draw_string '/home/geek/picoruby/calc.rb', 12, 10
   disp.set_text_color 0xE000
-  disp.draw_string "|", 234, 10
+  disp.draw_string '|', 234, 10
   disp.set_text_color 0xA800
-  disp.draw_string "+" + "-" * 38 + "+", 0, 20
+  disp.draw_string '+' + '-' * 38 + '+', 0, 20
 
   # Input section
   disp.set_text_color 0xE000
-  disp.draw_string "[ INPUT ]", 0, 35
+  disp.draw_string '[ INPUT ]', 0, 35
   disp.set_text_color 0xA800
-  disp.draw_string ">", 0, 50
+  disp.draw_string '>', 0, 50
 
   # Separator
   disp.set_text_color 0x7BCF
-  disp.draw_string "-" * 40, 0, 65
+  disp.draw_string '-' * 40, 0, 65
 
   # Output section
   disp.set_text_color 0xE000
-  disp.draw_string "[ OUTPUT ]", 0, 80
+  disp.draw_string '[ OUTPUT ]', 0, 80
   disp.set_text_color 0xA800
-  disp.draw_string "=>", 0, 95
-  disp.draw_string "=>", 0, 105
+  disp.draw_string '=>', 0, 95
+  disp.draw_string '=>', 0, 105
 
   # Footer
   disp.set_text_color 0x7BCF
-  disp.draw_string "_" * 40, 0, 115
+  disp.draw_string '_' * 40, 0, 115
 end
 
 # define adc object for battery display
@@ -282,7 +282,7 @@ loop do
   end
 
   # draw status area
-  status = is_shift ? "[ SHIFT ]" : "[ NORMAL ]"
+  status = is_shift ? '[ SHIFT ]' : '[ NORMAL ]'
   if status != prev_status
     battery_voltage = bat_adc.read_voltage
     status_with_battery = "#{status} BAT:#{battery_voltage}V"
