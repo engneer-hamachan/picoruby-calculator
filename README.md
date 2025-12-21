@@ -65,3 +65,14 @@ idf.py build
 idf.py flash
 ```
 
+---
+
+## ⚠️ Known Issues
+
+🚧 **Work in Progress** - The following issues are currently being fixed:
+
+- 💥 **Crash on Error**: The device may crash and restart when code execution results in an error
+- 🔄 **Resource Exhaustion**: After multiple executions, resources may become exhausted, causing the device to restart
+
+Stay tuned for updates! 🛠️
+
