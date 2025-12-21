@@ -10,13 +10,8 @@
 
 ## 🛠️ Setup
 
-### 1️⃣ Add submodules
-
+### 1️⃣ Update submodules
 ```bash
-git submodule add https://github.com/picoruby/picoruby-esp32.git components/picoruby-esp32
-git submodule add https://github.com/m5stack/M5GFX.git components/M5GFX
-git submodule add https://github.com/m5stack/M5Unified.git components/M5Unified
-git submodule add https://github.com/kishima/picoruby-m5unified.git components/picoruby-m5unified
 git submodule update --init --recursive
 ```
 
