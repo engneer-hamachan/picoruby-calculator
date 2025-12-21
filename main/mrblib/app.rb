@@ -314,7 +314,6 @@ loop do
       res = sandbox.result
     else
       res = error.to_s
-      sandbox = Sandbox.new ''
     end
 
     sandbox.suspend
