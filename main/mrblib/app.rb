@@ -150,38 +150,40 @@ def get_input
     ROW9.write pat[1]
     ROW11.write pat[2]
 
+    base_key = pat[0].to_s + pat[1].to_s + pat[2].to_s
+
     if COL3.low?
-      key = '3' + pat[0].to_s + pat[1].to_s + pat[2].to_s
+      key = '3' + base_key
       return KEYS[key]
     end
 
     if COL4.low?
-      key = '4' + pat[0].to_s + pat[1].to_s + pat[2].to_s
+      key = '4' + base_key
       return KEYS[key]
     end
 
     if COL5.low?
-      key = '5' + pat[0].to_s + pat[1].to_s + pat[2].to_s
+      key = '5' + base_key
       return KEYS[key]
     end
 
     if COL6.low?
-      key = '6' + pat[0].to_s + pat[1].to_s + pat[2].to_s
+      key = '6' + base_key
       return KEYS[key]
     end
 
     if COL7.low?
-      key = '7' + pat[0].to_s + pat[1].to_s + pat[2].to_s
+      key = '7' + base_key
       return KEYS[key]
     end
 
     if COL13.low?
-      key = '13' + pat[0].to_s + pat[1].to_s + pat[2].to_s
+      key = '13' + base_key
       return KEYS[key]
     end
 
     if COL15.low?
-      key = '15' + pat[0].to_s + pat[1].to_s + pat[2].to_s
+      key = '15' + base_key
       return KEYS[key]
     end
   end
