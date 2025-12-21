@@ -290,9 +290,9 @@ loop do
     prev_status = status
   end
 
-  str = get_input
+  key_input = get_input
 
-  if str == 'ret' && code != ''
+  if key_input == 'ret' && code != ''
     code_executed = code
     res = nil
 
@@ -315,48 +315,59 @@ loop do
     end
 
     code = ''
+
     next
   end
 
-  if str != '' && str != 'ret' && !is_input
+  if key_input != '' && key_input != 'ret' && !is_input
     is_input = true
 
-    if str == 'shift'
+    if key_input == 'shift'
       is_shift = !is_shift
+
       next
     end
 
-    if str == 'fn'
-      is_fn = true
+    if key_input == 'fn'
+      is_fn = !is_fn
+      
       next
     end
 
-    if str == 'del'
+    if key_input == 'del'
       code = code[0..-2]
       is_shift = false
-    else
-      if is_shift
-        code << SHIFT_TABLE[str]
-        is_shift = false
-        next
+      is_fn = false
+
+      next
+    end
+
+    if is_shift
+      code << SHIFT_TABLE[key_input]
+      is_shift = false
+
+      next
+    end
+
+    if is_fn
+      key_input = FN_TABLE[key_input]
+      is_fn = false
+
+      if key_input == 'up'
+        code = prev_code_executed
+      else
+        code << key_input
       end
 
-      if is_fn
-        is_fn = false
-        str = FN_TABLE[str]
-        if str == 'up'
-          code = prev_code_executed
-        else
-          code << str
-        end
-        next
-      end
-      
-      code << str
+      next
     end
+      
+    code << key_input
+
+    next
   end
 
-  if str == ''
+  if key_input == ''
     is_input = false
   end
 end
