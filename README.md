@@ -32,15 +32,13 @@ M5Unified
 M5GFX
 ```
 
+Update xtensa
 ```text
 # vim components/picoruby-esp32/picoruby/build_config/xtensa-esp.rb
 conf.gem File.expand_path('../../../picoruby-m5unified', __dir__)
 ```
 
-```bash
-cat main_task.rb > components/picoruby_esp32/mrblib/main_task.rb 
-```
-
+Update build & flash
 ```text
 . $(YOUR_ESP_IDF_PATH)/export.sh
 idf.py set-target esp32s3
