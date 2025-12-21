@@ -1,3 +1,4 @@
+Add submodules
 ``` bash
 git submodule add https://github.com/picoruby/picoruby-esp32.git components/picoruby-esp32
 git submodule add https://github.com/m5stack/M5GFX.git components/M5GFX
@@ -34,6 +35,10 @@ M5GFX
 ```text
 # vim components/picoruby-esp32/picoruby/build_config/xtensa-esp.rb
 conf.gem File.expand_path('../../../picoruby-m5unified', __dir__)
+```
+
+```bash
+cat main_task.rb > components/picoruby_esp32/mrblib/main_task.rb 
 ```
 
 ```text
