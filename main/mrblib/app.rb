@@ -2,7 +2,7 @@ require 'm5unified'
 require 'gpio'
 require 'adc'
 
-# 定数定義ここから
+# Constants definition start
 COL3 = GPIO.new(3, GPIO::IN)
 COL4 = GPIO.new(4, GPIO::IN)
 COL5 = GPIO.new(5, GPIO::IN)
@@ -141,9 +141,9 @@ PATTERN =
     [1, 1, 1]
   ]
 
-# 定数定義ここまで
+# Constants definition end
 
-# ti-doc: keyboard入力を読み取ります
+# ti-doc: Read keyboard input
 def get_input
   PATTERN.each do |pat|
     ROW8.write pat[0]
@@ -189,7 +189,7 @@ def get_input
   ''
 end
 
-# ti-doc: 静的に配置されているuiを描画します
+# ti-doc: Draw static UI elements
 def draw_static_ui(disp)
   # Header
   disp.set_text_color 0xA800
