@@ -300,9 +300,10 @@ loop do
     code_executed = code
     res = ''
 
-    unless sandbox.compile code, remove_lv: true
+    unless sandbox.compile "_ = (#{code})", remove_lv: true
       res = 'syntax error'
       code = ''
+
       next
     end
 
