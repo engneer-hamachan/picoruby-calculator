@@ -68,6 +68,7 @@ idf.py flash
 
 - 💥 **Crash on Error**: The device may crash and restart when code execution results in an error
 - 🔄 **Resource Exhaustion**: After multiple executions, resources may become exhausted, causing the device to restart
+- 🔤 **Variable Assignment**: Lowercase variable assignment without prefix doesn't work (e.g., `x = 1` fails). Use uppercase variables (e.g., `X = 1`) or prefix with `$` (e.g., `$x = 1`) instead
 
 Stay tuned for updates! 🛠️
 
