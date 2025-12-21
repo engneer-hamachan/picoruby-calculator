@@ -1,0 +1,282 @@
+{
+  "frame": "Builtin",
+  "class": "M5",
+  "class_methods": [
+    {
+      "name": "begin",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Initialize M5 device"
+    },
+    {
+      "name": "Display",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "M5GFX"
+        ]
+      },
+      "document": "Get display object"
+    },
+    {
+      "name": "get_pin",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get state of specified pin number"
+    },
+    {
+      "name": "get_button",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Get button state"
+    },
+    {
+      "name": "get_display",
+      "arguments": [
+        {
+          "type": [
+            "DefaultInt"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "M5GFX"
+        ]
+      },
+      "document": "Get specified display"
+    },
+    {
+      "name": "get_display_count",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get number of displays"
+    },
+    {
+      "name": "add_display",
+      "arguments": [
+        {
+          "type": [
+            "M5GFX"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Add display"
+    },
+    {
+      "name": "get_display_index",
+      "arguments": [
+        {
+          "type": [
+            "Untyped"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get display index"
+    },
+    {
+      "name": "set_primary_display",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set primary display"
+    },
+    {
+      "name": "set_primary_display_type",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set primary display type"
+    },
+    {
+      "name": "set_log_display_index",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set log display index"
+    },
+    {
+      "name": "set_log_display_type",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set log display type"
+    },
+    {
+      "name": "get_update_msec",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get update interval in milliseconds"
+    },
+    {
+      "name": "config_t",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Get configuration structure"
+    },
+    {
+      "name": "get_board",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get board type"
+    },
+    {
+      "name": "update",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Update state"
+    },
+    {
+      "name": "dsp",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Update display"
+    },
+    {
+      "name": "set_touch_button_height_by_ratio",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set touch button height by ratio"
+    },
+    {
+      "name": "set_touch_button_height",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set touch button height"
+    },
+    {
+      "name": "get_touch_button_height",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get touch button height"
+    },
+    {
+      "name": "get_io_expander",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Get IO expander"
+    }
+  ]
+}

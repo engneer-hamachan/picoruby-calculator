@@ -238,7 +238,9 @@ is_fn = false
 is_need_redraw_input = false
 code = ''
 prev_code_display = ''
+res = ''
 prev_res = ''
+code_executed = ''
 prev_code_executed = ''
 prev_status = ''
 
@@ -267,14 +269,14 @@ loop do
   end
 
   # draw result area
-  if $res.to_s != prev_res || $code_executed.to_s != prev_code_executed
+  if res.to_s != prev_res || code_executed.to_s != prev_code_executed
     disp.fill_rect 18, 95, 222, 20, 0x0000
     disp.set_text_color 0xBDF7
-    disp.draw_string " #{$code_executed}", 18, 95
+    disp.draw_string " #{code_executed}", 18, 95
     disp.set_text_color 0xFFFF
-    disp.draw_string " #{$res}", 18, 105
-    prev_res = $res.to_s
-    prev_code_executed = $code_executed.to_s
+    disp.draw_string " #{res}", 18, 105
+    prev_res = res.to_s
+    prev_code_executed = code_executed.to_s
   end
 
   # draw status area
@@ -291,11 +293,11 @@ loop do
   str = get_input
 
   if str == 'ret' && code != ''
-    $code_executed = code
-    $res = nil
+    code_executed = code
+    res = nil
 
     unless sandbox.compile code, remove_lv: true
-      $res = 'syntax error'
+      res = 'syntax error'
       code = ''
       next
     end
@@ -306,10 +308,10 @@ loop do
     sandbox.suspend
 
     if sandbox.error.nil?
-      $res = sandbox.result
+      res = sandbox.result
     else
-      $res = sandbox.error.to_s
-      s = Sandbox.new ''
+      res = sandbox.error.to_s
+      sandbox = Sandbox.new ''
     end
 
     code = ''

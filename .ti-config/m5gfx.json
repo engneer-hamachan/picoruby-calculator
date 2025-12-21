@@ -1,0 +1,2205 @@
+{
+  "frame": "Builtin",
+  "class": "M5GFX",
+  "instance_methods": [
+    {
+      "name": "get_rotation",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get screen rotation angle (0-3)"
+    },
+    {
+      "name": "set_rotation",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set screen rotation angle (0-3)"
+    },
+    {
+      "name": "get_color_depth",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get current color depth"
+    },
+    {
+      "name": "set_color_depth",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set color depth (bits)"
+    },
+    {
+      "name": "get_color_converter",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get color converter"
+    },
+    {
+      "name": "width",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get screen width in pixels"
+    },
+    {
+      "name": "height",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get screen height in pixels"
+    },
+    {
+      "name": "set_pivot",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set drawing pivot point"
+    },
+    {
+      "name": "get_pivot_x",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get pivot X coordinate"
+    },
+    {
+      "name": "get_pivot_y",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get pivot Y coordinate"
+    },
+    {
+      "name": "set_clip_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set clipping rectangle"
+    },
+    {
+      "name": "get_clip_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get clipping rectangle"
+    },
+    {
+      "name": "clear_clip_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Clear clipping rectangle"
+    },
+    {
+      "name": "set_scroll_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set scroll area"
+    },
+    {
+      "name": "get_scroll_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get scroll area"
+    },
+    {
+      "name": "clear_scroll_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Clear scroll area"
+    },
+    {
+      "name": "clear",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Clear screen"
+    },
+    {
+      "name": "clear_display",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Clear display"
+    },
+    {
+      "name": "display",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Display drawing contents on screen"
+    },
+    {
+      "name": "wait_display",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Wait for screen update to complete"
+    },
+    {
+      "name": "display_busy",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Check if screen is updating"
+    },
+    {
+      "name": "set_auto_display",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set auto display mode"
+    },
+    {
+      "name": "get_swap_bytes",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get byte swap state"
+    },
+    {
+      "name": "set_swap_bytes",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set byte swap"
+    },
+    {
+      "name": "is_readable",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Check if screen is readable"
+    },
+    {
+      "name": "is_epd",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Check if e-paper display"
+    },
+    {
+      "name": "is_bus_shared",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Check if bus is shared"
+    },
+    {
+      "name": "is_spi_shared",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Check if SPI bus is shared"
+    },
+    {
+      "name": "get_scan_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get current scan line position"
+    },
+    {
+      "name": "draw_pixel",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw pixel"
+    },
+    {
+      "name": "draw_fast_v_line",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw vertical line quickly"
+    },
+    {
+      "name": "draw_fast_h_line",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw horizontal line quickly"
+    },
+    {
+      "name": "draw_rect",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw rectangle outline"
+    },
+    {
+      "name": "draw_round_rect",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw rounded rectangle outline"
+    },
+    {
+      "name": "draw_circle",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw circle outline"
+    },
+    {
+      "name": "draw_ellipse",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw ellipse outline"
+    },
+    {
+      "name": "draw_line",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw line"
+    },
+    {
+      "name": "draw_triangle",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw triangle outline"
+    },
+    {
+      "name": "draw_bezier",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw Bezier curve"
+    },
+    {
+      "name": "draw_ellipse_arc",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw ellipse arc"
+    },
+    {
+      "name": "draw_arc",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw arc"
+    },
+    {
+      "name": "draw_circle_helper",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw part of circle (helper function)"
+    },
+    {
+      "name": "draw_gradient_h_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw horizontal gradient line"
+    },
+    {
+      "name": "draw_gradient_v_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw vertical gradient line"
+    },
+    {
+      "name": "draw_gradient_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw gradient line"
+    },
+    {
+      "name": "draw_smooth_line",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw smooth line (with anti-aliasing)"
+    },
+    {
+      "name": "draw_wide_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw thick line"
+    },
+    {
+      "name": "draw_wedge_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw line with varying width"
+    },
+    {
+      "name": "draw_spot",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw spot (point)"
+    },
+    {
+      "name": "draw_gradient_spot",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw gradient spot"
+    },
+    {
+      "name": "draw_bitmap",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw bitmap image"
+    },
+    {
+      "name": "draw_x_bitmap",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw XBitmap format image"
+    },
+    {
+      "name": "draw_string",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw string"
+    },
+    {
+      "name": "draw_number",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw number"
+    },
+    {
+      "name": "draw_float",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw floating point number"
+    },
+    {
+      "name": "draw_centre_string",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw string with center alignment"
+    },
+    {
+      "name": "draw_center_string",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw string with center alignment"
+    },
+    {
+      "name": "draw_right_string",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw string with right alignment"
+    },
+    {
+      "name": "draw_char",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw character"
+    },
+    {
+      "name": "set_cursor",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set cursor position"
+    },
+    {
+      "name": "get_cursor_x",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get cursor X coordinate"
+    },
+    {
+      "name": "get_cursor_y",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get cursor Y coordinate"
+    },
+    {
+      "name": "set_text_style",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text style"
+    },
+    {
+      "name": "set_text_size",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text size"
+    },
+    {
+      "name": "get_text_size_x",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get text width scale"
+    },
+    {
+      "name": "get_text_size_y",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get text height scale"
+    },
+    {
+      "name": "set_text_datum",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text datum"
+    },
+    {
+      "name": "get_text_datum",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get text datum"
+    },
+    {
+      "name": "set_text_padding",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text padding"
+    },
+    {
+      "name": "get_text_padding",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get text padding"
+    },
+    {
+      "name": "set_text_wrap",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text wrap"
+    },
+    {
+      "name": "set_text_scroll",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text scroll"
+    },
+    {
+      "name": "set_text_color",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text color"
+    },
+    {
+      "name": "font_height",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get font height"
+    },
+    {
+      "name": "font_width",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get font width"
+    },
+    {
+      "name": "text_length",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get number of characters that fit in specified width"
+    },
+    {
+      "name": "text_width",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get display width of string"
+    },
+    {
+      "name": "set_text_font",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set text font"
+    },
+    {
+      "name": "set_free_font",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set free font"
+    },
+    {
+      "name": "set_font",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set font"
+    },
+    {
+      "name": "load_font",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Load VLW font"
+    },
+    {
+      "name": "load_font_with_path",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Load font with specified path"
+    },
+    {
+      "name": "unload_font",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Unload font"
+    },
+    {
+      "name": "show_font",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Show font list"
+    },
+    {
+      "name": "print",
+      "arguments": [
+        {
+          "type": [
+            "String",
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Print text"
+    },
+    {
+      "name": "print_number",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Print number"
+    },
+    {
+      "name": "println",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Print text with newline"
+    },
+    {
+      "name": "write",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write data"
+    },
+    {
+      "name": "printf",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Print formatted text"
+    },
+    {
+      "name": "vprintf",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Print formatted text with variable arguments"
+    },
+    {
+      "name": "fill_rect",
+      "document": "Draw filled rectangle",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      }
+    },
+    {
+      "name": "fill_round_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw filled rounded rectangle"
+    },
+    {
+      "name": "fill_circle",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw filled circle"
+    },
+    {
+      "name": "fill_ellipse",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw filled ellipse"
+    },
+    {
+      "name": "fill_triangle",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw filled triangle"
+    },
+    {
+      "name": "fill_ellipse_arc",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw filled ellipse arc"
+    },
+    {
+      "name": "fill_arc",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw filled arc"
+    },
+    {
+      "name": "fill_circle_helper",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Fill part of circle (helper function)"
+    },
+    {
+      "name": "fill_affine",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Fill affine transformed region"
+    },
+    {
+      "name": "fill_gradient_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw gradient rectangle"
+    },
+    {
+      "name": "fill_smooth_round_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Fill smooth rounded rectangle"
+    },
+    {
+      "name": "fill_smooth_circle",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Fill smooth circle"
+    },
+    {
+      "name": "fill_screen",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Fill entire screen"
+    },
+    {
+      "name": "color16to8",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Convert 16-bit color to 8-bit color"
+    },
+    {
+      "name": "color8to16",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Convert 8-bit color to 16-bit color"
+    },
+    {
+      "name": "color16to24",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Convert 16-bit color to 24-bit color"
+    },
+    {
+      "name": "color24to16",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Convert 24-bit color to 16-bit color"
+    },
+    {
+      "name": "set_color",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set drawing color"
+    },
+    {
+      "name": "set_raw_color",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set raw color value"
+    },
+    {
+      "name": "get_raw_color",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get raw color value"
+    },
+    {
+      "name": "set_base_color",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set base color"
+    },
+    {
+      "name": "get_base_color",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get base color"
+    },
+    {
+      "name": "get_palette",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Get palette"
+    },
+    {
+      "name": "get_palette_count",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get palette count"
+    },
+    {
+      "name": "has_palette",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Check if palette exists"
+    },
+    {
+      "name": "flood_fill",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Perform flood fill"
+    },
+    {
+      "name": "paint",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Perform paint (fill)"
+    },
+    {
+      "name": "map_gradient",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Apply gradient map"
+    },
+    {
+      "name": "qrcode",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Draw QR code"
+    },
+    {
+      "name": "file",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Perform file operations"
+    },
+    {
+      "name": "create_png",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Create PNG image"
+    },
+    {
+      "name": "release_png_memory",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Release PNG memory"
+    },
+    {
+      "name": "cp437",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Enable CP437 character encoding"
+    },
+    {
+      "name": "set_attribute",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set attribute"
+    },
+    {
+      "name": "get_attribute",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get attribute"
+    },
+    {
+      "name": "set_file_storage",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set file storage"
+    },
+    {
+      "name": "clear_file_storage",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Clear file storage"
+    },
+    {
+      "name": "prepare_tmp_transaction",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Prepare temporary transaction"
+    },
+    {
+      "name": "push_image",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push image"
+    },
+    {
+      "name": "push_grayscale_image",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push grayscale image"
+    },
+    {
+      "name": "push_grayscale_image_rotate_zoom",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push rotated/scaled grayscale image"
+    },
+    {
+      "name": "push_grayscale_image_affine",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push affine transformed grayscale image"
+    },
+    {
+      "name": "push_alpha_image",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push image with alpha channel"
+    },
+    {
+      "name": "push_block",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push block data"
+    },
+    {
+      "name": "push_pixels",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push pixel data"
+    },
+    {
+      "name": "push_pixels_dma",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Push pixel data using DMA"
+    },
+    {
+      "name": "read_rect_rgb",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Read RGB values of rectangular region"
+    },
+    {
+      "name": "read_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Read rectangular region"
+    },
+    {
+      "name": "p",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set parameter"
+    },
+    {
+      "name": "copy_rect",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Copy rectangular region"
+    },
+    {
+      "name": "scroll",
+      "arguments": [
+        {
+          "type": [
+            "Int"
+          ]
+        },
+        {
+          "type": [
+            "Int"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Scroll screen"
+    },
+    {
+      "name": "start_write",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Start drawing process (acquire bus)"
+    },
+    {
+      "name": "end_write",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "End drawing process (release bus)"
+    },
+    {
+      "name": "begin_transaction",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Begin transaction"
+    },
+    {
+      "name": "end_transaction",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "End transaction"
+    },
+    {
+      "name": "get_start_count",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Int"
+        ]
+      },
+      "document": "Get start count"
+    },
+    {
+      "name": "set_window",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set drawing window"
+    },
+    {
+      "name": "set_addr_window",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Set address window"
+    },
+    {
+      "name": "write_pixel",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write pixel"
+    },
+    {
+      "name": "write_fast_v_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write vertical line quickly"
+    },
+    {
+      "name": "write_fast_h_line",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write horizontal line quickly"
+    },
+    {
+      "name": "write_fill_rect",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write filled rectangle"
+    },
+    {
+      "name": "write_fill_rect_preclipped",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write pre-clipped filled rectangle"
+    },
+    {
+      "name": "write_color",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write color data"
+    },
+    {
+      "name": "write_pixels",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write pixel data"
+    },
+    {
+      "name": "write_pixels_dma",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Write pixel data using DMA"
+    },
+    {
+      "name": "init_dma",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Initialize DMA"
+    },
+    {
+      "name": "wait_dma",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Wait for DMA transfer to complete"
+    },
+    {
+      "name": "dma_busy",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Check if DMA is busy"
+    }
+  ]
+}

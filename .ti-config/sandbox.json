@@ -1,0 +1,229 @@
+{
+  "frame": "Builtin",
+  "class": "Sandbox",
+  "extends": [],
+  "instance_methods": [
+    {
+      "name": "compile",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        },
+        {
+          "type": [
+            "DefaultBool"
+          ],
+          "key": "remove_lv:"
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Compile Ruby script and return true if successful"
+    },
+    {
+      "name": "compile_from_memory",
+      "arguments": [
+        {
+          "type": [
+            "Integer"
+          ]
+        },
+        {
+          "type": [
+            "Integer"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Compile Ruby script from memory address and size"
+    },
+    {
+      "name": "resume",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Resume suspended sandbox task"
+    },
+    {
+      "name": "execute",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Execute compiled code in sandbox"
+    },
+    {
+      "name": "state",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Symbol"
+        ]
+      },
+      "document": "Get sandbox task state (DORMANT, READY, RUNNING, WAITING, SUSPENDED)"
+    },
+    {
+      "name": "result",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Untyped"
+        ]
+      },
+      "document": "Get execution result from sandbox"
+    },
+    {
+      "name": "stop",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Stop sandbox task"
+    },
+    {
+      "name": "suspend",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Suspend sandbox task"
+    },
+    {
+      "name": "free_parser",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Free parser resources (not implemented in mruby)"
+    },
+    {
+      "name": "exec_mrb",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Execute compiled mruby bytecode from string"
+    },
+    {
+      "name": "exec_mrb_from_memory",
+      "arguments": [
+        {
+          "type": [
+            "Integer"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Execute compiled mruby bytecode from memory address"
+    },
+    {
+      "name": "terminate",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Terminate sandbox task"
+    },
+    {
+      "name": "wait",
+      "arguments": [
+        {
+          "type": [
+            "Nil|Int"
+          ],
+          "key": "timeout:"
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Bool"
+        ]
+      },
+      "document": "Wait for sandbox task to finish. Returns false on timeout or interrupt. Default timeout is 10000ms (10 sec)."
+    },
+    {
+      "name": "load_file",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        },
+        {
+          "type": [
+            "Bool"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Nil"
+        ]
+      },
+      "document": "Load and execute Ruby script or mruby bytecode from file. If join is true (default), waits for execution to complete."
+    },
+    {
+      "name": "error",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "Bot|Nil"
+        ]
+      },
+      "document": "return execute error or return nil"
+    }
+  ],
+  "class_methods": [
+    {
+      "name": "new",
+      "arguments": [
+        {
+          "type": [
+            "String"
+          ]
+        }
+      ],
+      "return_type": {
+        "type": [
+          "Sandbox"
+        ]
+      },
+      "document": "Create new Sandbox object with optional name (default: 'sandbox')"
+    }
+  ],
+  "constants": null
+}
