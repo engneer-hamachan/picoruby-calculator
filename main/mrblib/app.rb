@@ -308,11 +308,12 @@ loop do
 
     sandbox.execute
     sandbox.wait timeout: nil
+    error = sandbox.error
 
-    if sandbox.error.nil?
+    if error.nil?
       res = sandbox.result
     else
-      res = 'runtime error'
+      res = error.to_s
       sandbox = Sandbox.new ''
     end
 
