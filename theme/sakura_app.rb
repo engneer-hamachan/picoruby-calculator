@@ -199,7 +199,7 @@ def draw_static_ui(disp)
 
   # タイトルバー - 和風デザイン (y=3)
   disp.set_text_color 0xFFB6C1  # 桜ピンク
-  disp.draw_string ('*~' * 19) + '*', 3, 3  # 39文字 (花びら装飾)
+  disp.draw_string '~' * 39, 3, 3  # ~のみ描画
 
   # ファイル名 (y=13, 中央寄せ)
   # sakura/dentaku.rb = 17文字 = 102px, 中央は (240-102)/2 = 69px
@@ -207,23 +207,11 @@ def draw_static_ui(disp)
   disp.draw_string '<', 57, 15
   disp.draw_string '>', 177, 15
   disp.set_text_color 0xFFFDF0
-  disp.draw_string 'sakura/dentaku.rb', 69, 13  # 17文字
-
-  # 入力枠線 (y=25)
-  disp.set_text_color 0xFFE4EB
-  disp.draw_string '  . ' * 10, 0, 25  # 40文字 (点+3スペース×10回)
-  disp.set_text_color 0xFFB6C1
-  disp.draw_string '.   ' * 10, 0, 25  # 40文字 (点+3スペース×10回)
-
+  disp.draw_string 'sakura/dentaku.rb', 69, 15  # 17文字
 
   # 入力プロンプト (y=48)
   disp.set_text_color 0xFFB6C1
   disp.draw_string '>', 6, 48
-
-  disp.set_text_color 0xFFE4EB
-  disp.draw_string '  . ' * 10, 0, 70  # 40文字 (点+3スペース×10回)
-  disp.set_text_color 0xFFB6C1
-  disp.draw_string '.   ' * 10, 0, 70  # 40文字 (点+3スペース×10回)
 
 
   # 結果プロンプト (y=93)
@@ -232,7 +220,7 @@ def draw_static_ui(disp)
 
   # フッター装飾 (y=115)
   disp.set_text_color 0xFFB6C1
-  disp.draw_string ('*_' * 19) + '*', 3, 113  # 39文字 (花びら装飾)
+  disp.draw_string '_' * 39, 3, 113  # _のみ描画
 end
 
 # define adc object for battery display
@@ -253,6 +241,9 @@ prev_res = ''
 code_executed = ''
 prev_code_executed = ''
 prev_status = ''
+anim_offset = 0  # アニメーション用オフセット
+frame_count = 0  # フレームカウンタ
+blink_count = 0  # *の点滅用カウンタ
 
 # M5 start
 M5.begin
@@ -267,6 +258,66 @@ draw_static_ui(disp)
 
 loop do
   M5.update
+
+  # *の点滅アニメーション - 隣同士互い違いにピンクと白
+  blink_phase = (blink_count / 60) % 2  # 60フレームごとに切り替え
+
+  # 上部の* (y=3, 20個の*を~の間に配置)
+  20.times do |i|
+    x_pos = 3 + (i * 12)  # 3, 15, 27, 39, ... (文字幅6px×2文字ごと)
+    # 偶数番目と奇数番目で色を反転
+    if (i % 2 == 0 && blink_phase == 0) || (i % 2 == 1 && blink_phase == 1)
+      disp.set_text_color 0xFFB6C1  # ピンク
+    else
+      disp.set_text_color 0xFFFFFF  # 白
+    end
+    disp.draw_string '*', x_pos, 3
+  end
+
+  # 下部の* (y=113, 20個の*を_の間に配置)
+  20.times do |i|
+    x_pos = 3 + (i * 12)  # 3, 15, 27, 39, ... (文字幅6px×2文字ごと)
+    # 偶数番目と奇数番目で色を反転
+    if (i % 2 == 0 && blink_phase == 0) || (i % 2 == 1 && blink_phase == 1)
+      disp.set_text_color 0xFFB6C1  # ピンク
+    else
+      disp.set_text_color 0xFFFFFF  # 白
+    end
+    disp.draw_string '*', x_pos, 113
+  end
+
+  blink_count = blink_count + 1
+
+  # フレームカウンタを増やして、60フレームに1回だけオフセットを更新（速度を遅く）
+  frame_count = frame_count + 1
+  if frame_count >= 60
+    anim_offset = (anim_offset + 1) % 4
+    frame_count = 0
+
+    # アニメーションが更新される時だけ描画 - 上部の線 (y=25) - 右から左へ
+    pattern1 = '  . ' * 20  # パターンを2倍の長さに
+    shifted_pattern1 = pattern1[(4 - anim_offset) % 4, 40]  # 逆方向
+    disp.fill_rect 0, 25, 240, 8, 0x000000
+    disp.set_text_color 0xFFE4EB
+    disp.draw_string shifted_pattern1, 0, 25
+
+    pattern2 = '.   ' * 20
+    shifted_pattern2 = pattern2[(4 - anim_offset) % 4, 40]  # 逆方向
+    disp.set_text_color 0xFFB6C1
+    disp.draw_string shifted_pattern2, 0, 25
+
+    # アニメーション描画 - 下部の線 (y=70) - 左から右へ
+    pattern3 = '   .' * 20
+    shifted_pattern3 = pattern3[anim_offset % 4, 40]
+    disp.fill_rect 0, 70, 240, 8, 0x000000
+    disp.set_text_color 0xFFE4EB
+    disp.draw_string shifted_pattern3, 0, 70
+
+    pattern4 = ' .  ' * 20
+    shifted_pattern4 = pattern4[anim_offset % 4, 40]
+    disp.set_text_color 0xFFB6C1
+    disp.draw_string shifted_pattern4, 0, 70
+  end
 
   # draw input area - 桜テーマ (y=48, x=12から表示)
   code_display = " #{code}_"
