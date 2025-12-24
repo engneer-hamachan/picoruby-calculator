@@ -255,6 +255,17 @@ disp.set_text_size 1
 # initial draw
 draw_static_ui(disp)
 
+# 初期ドット線描画 - 上部の線 (y=25)
+disp.set_text_color 0xFFE4EB
+disp.draw_string '  . ' * 10, 0, 25
+disp.set_text_color 0xFFB6C1
+disp.draw_string '.   ' * 10, 0, 25
+
+# 初期ドット線描画 - 下部の線 (y=70)
+disp.set_text_color 0xFFE4EB
+disp.draw_string '   .' * 10, 0, 70
+disp.set_text_color 0xFFB6C1
+disp.draw_string ' .  ' * 10, 0, 70
 
 loop do
   M5.update
