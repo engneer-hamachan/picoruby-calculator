@@ -81,14 +81,14 @@ This calculator comes with multiple themes to customize your experience:
 ### 🌸 Sakura Theme
 A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tones.
 
-**[View Live Preview →](https://engneer-hamachan.github.io/picoruby-calculator/preview/sakura_preview.html)**
+**[View Live Preview →](https://engneer-hamachan.github.io/picoruby-calculator/docs/sakura_preview.html)**
 
 **Colors:** `#FFB6C1` Sakura Pink • `#FFC8DC` Light Pink • `#FFFDF0` Cream • `#FFE4EB` Pale Sakura
 
 ### 🌃 Geek Theme (Cyberpunk)
 A vibrant cyberpunk theme with hot magenta and neon orange - retro arcade energy!
 
-**[View Live Preview →](https://engneer-hamachan.github.io/picoruby-calculator/preview/geek_preview.html)**
+**[View Live Preview →](https://engneer-hamachan.github.io/picoruby-calculator/docs/geek_preview.html)**
 
 **Colors:** `#FF007C` Hot Magenta • `#FF9F1C` Neon Orange • `#F7F7FF` White • `#3A1C71` Dark Purple
 
