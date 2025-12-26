@@ -266,8 +266,6 @@ prev_res = ''
 code_executed = ''
 prev_code_executed = ''
 prev_status = ''
-anim_offset = 0
-frame_count = 0
 blink_count = 0
 
 # M5 start
@@ -285,37 +283,6 @@ loop do
 
   draw_animation_ui disp, blink_count
   blink_count = blink_count + 1
-
-  # フレームカウンタを増やして、60フレームに1回だけオフセットを更新（速度を遅く）
-  frame_count = frame_count + 1
-  if frame_count >= 60
-    anim_offset = (anim_offset + 1) % 4
-    frame_count = 0
-
-    # アニメーションが更新される時だけ描画 - 上部の線 (y=25) - 右から左へ
-    pattern1 = '  . ' * 20  # パターンを2倍の長さに
-    shifted_pattern1 = pattern1[(4 - anim_offset) % 4, 40]  # 逆方向
-    disp.fill_rect 0, 25, 240, 8, 0x000000
-    disp.set_text_color 0xFFE4EB
-    disp.draw_string shifted_pattern1, 0, 25
-
-    pattern2 = '.   ' * 20
-    shifted_pattern2 = pattern2[(4 - anim_offset) % 4, 40]  # 逆方向
-    disp.set_text_color 0xFFB6C1
-    disp.draw_string shifted_pattern2, 0, 25
-
-    # アニメーション描画 - 下部の線 (y=70) - 左から右へ
-    pattern3 = '   .' * 20
-    shifted_pattern3 = pattern3[anim_offset % 4, 40]
-    disp.fill_rect 0, 70, 240, 8, 0x000000
-    disp.set_text_color 0xFFE4EB
-    disp.draw_string shifted_pattern3, 0, 70
-
-    pattern4 = ' .  ' * 20
-    shifted_pattern4 = pattern4[anim_offset % 4, 40]
-    disp.set_text_color 0xFFB6C1
-    disp.draw_string shifted_pattern4, 0, 70
-  end
 
   # draw input area - 桜テーマ (y=48, x=12から表示)
   code_display = " #{code}_"
