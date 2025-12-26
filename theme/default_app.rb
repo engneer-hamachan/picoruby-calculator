@@ -194,36 +194,36 @@ end
 # ti-doc: Draw static UI elements
 def draw_static_ui(disp)
   # Header
-  disp.set_text_color 0xFF0080
+  disp.set_text_color 0xA800
   disp.draw_string '+' + '-' * 38 + '+', 0, 0
-  disp.set_text_color 0xFF0080
+  disp.set_text_color 0xE000
   disp.draw_string '| ', 0, 10
-  disp.set_text_color 0x711C91
+  disp.set_text_color 0xFFFF
   disp.draw_string '/home/geek/picoruby/calc.rb', 12, 10
-  disp.set_text_color 0xFF0080
+  disp.set_text_color 0xE000
   disp.draw_string '|', 234, 10
-  disp.set_text_color 0xFF0080
+  disp.set_text_color 0xA800
   disp.draw_string '+' + '-' * 38 + '+', 0, 20
 
   # Input section
-  disp.set_text_color 0xFF0080
+  disp.set_text_color 0xE000
   disp.draw_string '[ INPUT ]', 0, 35
-  disp.set_text_color 0x00FFFF
+  disp.set_text_color 0xA800
   disp.draw_string '>', 0, 50
 
   # Separator
-  disp.set_text_color 0x404040
+  disp.set_text_color 0x7BCF
   disp.draw_string '-' * 40, 0, 65
 
   # Output section
-  disp.set_text_color 0xFF0080
+  disp.set_text_color 0xE000
   disp.draw_string '[ OUTPUT ]', 0, 80
-  disp.set_text_color 0x00FFFF
+  disp.set_text_color 0xA800
   disp.draw_string '=>', 0, 95
   disp.draw_string '=>', 0, 105
 
   # Footer
-  disp.set_text_color 0x404040
+  disp.set_text_color 0x7BCF
   disp.draw_string '_' * 40, 0, 115
 end
 
@@ -263,8 +263,8 @@ loop do
   # draw input area
   code_display = " #{code}_"
   if code_display != prev_code_display || is_need_redraw_input
-    disp.fill_rect 12, 50, 228, 10, 0x000000
-    disp.set_text_color 0x00FFFF
+    disp.fill_rect 12, 50, 228, 10, 0x0000
+    disp.set_text_color 0xFFFF
     disp.draw_string code_display, 12, 50
     prev_code_display = code_display
     is_need_redraw_input = false
@@ -272,10 +272,10 @@ loop do
 
   # draw result area
   if res.to_s != prev_res || code_executed.to_s != prev_code_executed
-    disp.fill_rect 18, 95, 222, 20, 0x000000
-    disp.set_text_color 0x711C91
+    disp.fill_rect 18, 95, 222, 20, 0x0000
+    disp.set_text_color 0xBDF7
     disp.draw_string " #{code_executed}", 18, 95
-    disp.set_text_color 0xFF0080
+    disp.set_text_color 0xFFFF
     disp.draw_string " #{res}", 18, 105
     prev_res = res.to_s
     prev_code_executed = code_executed.to_s
@@ -286,8 +286,8 @@ loop do
   if status != prev_status
     battery_voltage = bat_adc.read_voltage
     status_with_battery = "#{status} BAT:#{battery_voltage}V"
-    disp.fill_rect 0, 125, 240, 10, 0x000000
-    disp.set_text_color 0x711C91
+    disp.fill_rect 0, 125, 240, 10, 0x0000
+    disp.set_text_color 0xBDF7
     disp.draw_string status_with_battery, 0, 125
     prev_status = status
   end
