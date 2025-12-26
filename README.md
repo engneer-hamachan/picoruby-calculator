@@ -81,7 +81,6 @@ This calculator comes with multiple themes to customize your experience:
 ### 🌸 Sakura Theme
 A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tones.
 
-```
 ```html
 <span style="color: #FFB6C1">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <span style="color: #FFC8DC"><</span> <span style="color: #FFFDF0">sakura/dentaku.rb</span> <span style="color: #FFC8DC">></span>
@@ -91,7 +90,6 @@ A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tone
 
 <span style="color: #FFB6C1">></span> <span style="color: #FFFDF0">4</span>
 <span style="color: #FFB6C1">* * * * * * * * * * * *</span>
-```
 ```
 
 ### 🌃 Geek Theme (Cyberpunk)
