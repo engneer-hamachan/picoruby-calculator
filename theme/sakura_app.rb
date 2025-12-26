@@ -191,36 +191,61 @@ def get_input
   ''
 end
 
-# ti-doc: Draw static UI elements - Sakura Theme
 # Screen: 240x135px, Char: 6px width, 40 chars per line
+# ti-doc: Draw static UI elements - Sakura Theme
 def draw_static_ui(disp)
-  # 背景グラデーション効果（薄桜色の帯）
+  # background
   disp.fill_rect 0, 0, 240, 2, 0xFFB6C1
 
-  # タイトルバー - 和風デザイン (y=3)
+  # title
   disp.set_text_color 0xFFB6C1  # 桜ピンク
   disp.draw_string '~' * 39, 3, 3  # ~のみ描画
-
-  # ファイル名 (y=13, 中央寄せ)
-  # sakura/dentaku.rb = 17文字 = 102px, 中央は (240-102)/2 = 69px
   disp.set_text_color 0xFFC8DC
   disp.draw_string '<', 57, 15
   disp.draw_string '>', 177, 15
   disp.set_text_color 0xFFFDF0
   disp.draw_string 'sakura/dentaku.rb', 69, 15  # 17文字
 
-  # 入力プロンプト (y=48)
+  # input
   disp.set_text_color 0xFFB6C1
   disp.draw_string '>', 6, 48
 
 
-  # 結果プロンプト (y=93)
+  # output
   disp.set_text_color 0xFFB6C1
   disp.draw_string '>', 6, 93
 
-  # フッター装飾 (y=115)
+  # footer
   disp.set_text_color 0xFFB6C1
   disp.draw_string '_' * 39, 3, 113  # _のみ描画
+
+  # 初期ドット線描画 - 上部の線 (y=25)
+  disp.set_text_color 0xFFE4EB
+  disp.draw_string '  . ' * 10, 0, 25
+  disp.set_text_color 0xFFB6C1
+  disp.draw_string '.   ' * 10, 0, 25
+
+  # 初期ドット線描画 - 下部の線 (y=70)
+  disp.set_text_color 0xFFE4EB
+  disp.draw_string '   .' * 10, 0, 70
+  disp.set_text_color 0xFFB6C1
+  disp.draw_string ' .  ' * 10, 0, 70
+end
+
+# ti-doc: draw animation ui
+def draw_animation_ui(disp, blink_count)
+  blink_phase = (blink_count / 60) % 2  # 60フレームごとに切り替え
+
+  20.times do |i|
+    x_pos = 3 + (i * 12)  # 3, 15, 27, 39, ... (文字幅6px×2文字ごと)
+    if (i % 2 == 0 && blink_phase == 0) || (i % 2 == 1 && blink_phase == 1)
+      disp.set_text_color 0xFFB6C1  # ピンク
+    else
+      disp.set_text_color 0xFFFFFF  # 白
+    end
+    disp.draw_string '*', x_pos, 3
+    disp.draw_string '*', x_pos, 113
+  end
 end
 
 # define adc object for battery display
@@ -241,9 +266,9 @@ prev_res = ''
 code_executed = ''
 prev_code_executed = ''
 prev_status = ''
-anim_offset = 0  # アニメーション用オフセット
-frame_count = 0  # フレームカウンタ
-blink_count = 0  # *の点滅用カウンタ
+anim_offset = 0
+frame_count = 0
+blink_count = 0
 
 # M5 start
 M5.begin
@@ -255,48 +280,10 @@ disp.set_text_size 1
 # initial draw
 draw_static_ui(disp)
 
-# 初期ドット線描画 - 上部の線 (y=25)
-disp.set_text_color 0xFFE4EB
-disp.draw_string '  . ' * 10, 0, 25
-disp.set_text_color 0xFFB6C1
-disp.draw_string '.   ' * 10, 0, 25
-
-# 初期ドット線描画 - 下部の線 (y=70)
-disp.set_text_color 0xFFE4EB
-disp.draw_string '   .' * 10, 0, 70
-disp.set_text_color 0xFFB6C1
-disp.draw_string ' .  ' * 10, 0, 70
-
 loop do
   M5.update
 
-  # *の点滅アニメーション - 隣同士互い違いにピンクと白
-  blink_phase = (blink_count / 60) % 2  # 60フレームごとに切り替え
-
-  # 上部の* (y=3, 20個の*を~の間に配置)
-  20.times do |i|
-    x_pos = 3 + (i * 12)  # 3, 15, 27, 39, ... (文字幅6px×2文字ごと)
-    # 偶数番目と奇数番目で色を反転
-    if (i % 2 == 0 && blink_phase == 0) || (i % 2 == 1 && blink_phase == 1)
-      disp.set_text_color 0xFFB6C1  # ピンク
-    else
-      disp.set_text_color 0xFFFFFF  # 白
-    end
-    disp.draw_string '*', x_pos, 3
-  end
-
-  # 下部の* (y=113, 20個の*を_の間に配置)
-  20.times do |i|
-    x_pos = 3 + (i * 12)  # 3, 15, 27, 39, ... (文字幅6px×2文字ごと)
-    # 偶数番目と奇数番目で色を反転
-    if (i % 2 == 0 && blink_phase == 0) || (i % 2 == 1 && blink_phase == 1)
-      disp.set_text_color 0xFFB6C1  # ピンク
-    else
-      disp.set_text_color 0xFFFFFF  # 白
-    end
-    disp.draw_string '*', x_pos, 113
-  end
-
+  draw_animation_ui disp, blink_count
   blink_count = blink_count + 1
 
   # フレームカウンタを増やして、60フレームに1回だけオフセットを更新（速度を遅く）
