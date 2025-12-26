@@ -74,6 +74,53 @@ idf.py flash
 
 ---
 
+## 🎨 Themes
+
+This calculator comes with multiple themes to customize your experience:
+
+### 🌸 Sakura Theme
+A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tones.
+
+```
+```html
+<span style="color: #FFB6C1">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span style="color: #FFC8DC"><</span> <span style="color: #FFFDF0">sakura/dentaku.rb</span> <span style="color: #FFC8DC">></span>
+
+<span style="color: #FFB6C1">></span> <span style="color: #FFFDF0">2+2_</span>
+<span style="color: #FFE4EB">. . . . . . . . . . . .</span>
+
+<span style="color: #FFB6C1">></span> <span style="color: #FFFDF0">4</span>
+<span style="color: #FFB6C1">* * * * * * * * * * * *</span>
+```
+```
+
+### 🌃 Geek Theme (Cyberpunk)
+A vibrant cyberpunk theme with hot magenta and neon orange - retro arcade energy!
+
+```html
+<span style="color: #FF007C">+--------------------------------------+</span>
+<span style="color: #FF007C">|</span> <span style="color: #FF9F1C">/home/geek/picoruby/calc.rb</span> <span style="color: #FF007C">|</span>
+<span style="color: #FF007C">+--------------------------------------+</span>
+
+<span style="color: #FF007C">[ INPUT ]</span>
+<span style="color: #FF9F1C">></span> <span style="color: #F7F7FF">2+2_</span>
+<span style="color: #3A1C71">----------------------------------------</span>
+<span style="color: #FF007C">[ OUTPUT ]</span>
+<span style="color: #FF9F1C">=></span> <span style="color: #F7F7FF">4</span>
+<span style="color: #3A1C71">________________________________________</span>
+```
+
+### 📋 Default Theme
+A clean, classic terminal-style interface with standard colors.
+
+**To switch themes:**
+```bash
+make list-themes              # List available themes
+make apply-theme THEME=geek   # Apply geek theme
+```
+
+---
+
 ## ⚠️ Known Issues
 
 🚧 **Work in Progress** - The following issues are currently being fixed:
