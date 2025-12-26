@@ -198,13 +198,13 @@ def draw_static_ui(disp)
   disp.fill_rect 0, 0, 240, 2, 0xFFB6C1
 
   # title
-  disp.set_text_color 0xFFB6C1  # 桜ピンク
-  disp.draw_string '~' * 39, 3, 3  # ~のみ描画
+  disp.set_text_color 0xFFB6C1
+  disp.draw_string '~' * 39, 3, 3
   disp.set_text_color 0xFFC8DC
   disp.draw_string '<', 57, 15
   disp.draw_string '>', 177, 15
   disp.set_text_color 0xFFFDF0
-  disp.draw_string 'sakura/dentaku.rb', 69, 15  # 17文字
+  disp.draw_string 'sakura/dentaku.rb', 69, 15
 
   # input
   disp.set_text_color 0xFFB6C1
@@ -217,31 +217,24 @@ def draw_static_ui(disp)
 
   # footer
   disp.set_text_color 0xFFB6C1
-  disp.draw_string '_' * 39, 3, 113  # _のみ描画
+  disp.draw_string '_' * 39, 3, 113
 
-  # 初期ドット線描画 - 上部の線 (y=25)
+  # initial dots line
   disp.set_text_color 0xFFE4EB
-  disp.draw_string '  . ' * 10, 0, 25
-  disp.set_text_color 0xFFB6C1
-  disp.draw_string '.   ' * 10, 0, 25
-
-  # 初期ドット線描画 - 下部の線 (y=70)
-  disp.set_text_color 0xFFE4EB
-  disp.draw_string '   .' * 10, 0, 70
-  disp.set_text_color 0xFFB6C1
-  disp.draw_string ' .  ' * 10, 0, 70
+  disp.draw_string '. . ' * 11, 0, 25
+  disp.draw_string '. . ' * 11, 0, 70
 end
 
 # ti-doc: draw animation ui
 def draw_animation_ui(disp, blink_count)
-  blink_phase = (blink_count / 60) % 2  # 60フレームごとに切り替え
+  blink_phase = (blink_count / 60) % 2
 
   20.times do |i|
-    x_pos = 3 + (i * 12)  # 3, 15, 27, 39, ... (文字幅6px×2文字ごと)
+    x_pos = 3 + (i * 12)
     if (i % 2 == 0 && blink_phase == 0) || (i % 2 == 1 && blink_phase == 1)
-      disp.set_text_color 0xFFB6C1  # ピンク
+      disp.set_text_color 0xFFB6C1
     else
-      disp.set_text_color 0xFFFFFF  # 白
+      disp.set_text_color 0xFFFFFF
     end
     disp.draw_string '*', x_pos, 3
     disp.draw_string '*', x_pos, 113
@@ -284,33 +277,33 @@ loop do
   draw_animation_ui disp, blink_count
   blink_count = blink_count + 1
 
-  # draw input area - 桜テーマ (y=48, x=12から表示)
+  # draw input area
   code_display = " #{code}_"
   if code_display != prev_code_display || is_need_redraw_input
-    disp.fill_rect 12, 48, 228, 8, 0x000000  # >の後ろをクリア
-    disp.set_text_color 0xFFFDF0  # 淡いクリーム色
+    disp.fill_rect 12, 48, 228, 8, 0x000000
+    disp.set_text_color 0xFFFDF0
     disp.draw_string code_display, 12, 48
     prev_code_display = code_display
     is_need_redraw_input = false
   end
 
-  # draw result area - 桜テーマ (y=93から)
+  # draw result area
   if res.to_s != prev_res || code_executed.to_s != prev_code_executed
-    disp.fill_rect 12, 93, 228, 8, 0x000000  # 結果エリアクリア
-    disp.set_text_color 0xFFE4EB  # 薄桜色（式表示）
-    disp.set_text_color 0xFFFDF0  # 淡いクリーム色（結果）
+    disp.fill_rect 12, 93, 228, 8, 0x000000
+    disp.set_text_color 0xFFE4EB
+    disp.set_text_color 0xFFFDF0
     disp.draw_string " #{res}", 12, 93
     prev_res = res.to_s
     prev_code_executed = code_executed.to_s
   end
 
-  # draw status area - 桜テーマ (y=125)
+  # draw status area
   status = is_shift ? '[SFT]' : '[NML]'
   if status != prev_status
     battery_voltage = bat_adc.read_voltage
     status_with_battery = "#{status} BAT:#{battery_voltage}V"
     disp.fill_rect 0, 125, 240, 10, 0x000000
-    disp.set_text_color 0xFFC8DC  # 明るい桜色
+    disp.set_text_color 0xFFC8DC
     disp.draw_string status_with_battery, 0, 125
     prev_status = status
   end
