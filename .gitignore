@@ -4,3 +4,4 @@ sdkconfig.old
 dependencies.lock
 .cache
 main/mrb/app.c
+main/mrblib/app.rb
