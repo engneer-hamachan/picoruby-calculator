@@ -81,32 +81,16 @@ This calculator comes with multiple themes to customize your experience:
 ### 🌸 Sakura Theme
 A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tones.
 
-```html
-<span style="color: #FFB6C1">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<span style="color: #FFC8DC"><</span> <span style="color: #FFFDF0">sakura/dentaku.rb</span> <span style="color: #FFC8DC">></span>
+**[View Live Preview →](preview/sakura_preview.html)**
 
-<span style="color: #FFB6C1">></span> <span style="color: #FFFDF0">2+2_</span>
-<span style="color: #FFE4EB">. . . . . . . . . . . .</span>
-
-<span style="color: #FFB6C1">></span> <span style="color: #FFFDF0">4</span>
-<span style="color: #FFB6C1">* * * * * * * * * * * *</span>
-```
+**Colors:** `#FFB6C1` Sakura Pink • `#FFC8DC` Light Pink • `#FFFDF0` Cream • `#FFE4EB` Pale Sakura
 
 ### 🌃 Geek Theme (Cyberpunk)
 A vibrant cyberpunk theme with hot magenta and neon orange - retro arcade energy!
 
-```html
-<span style="color: #FF007C">+--------------------------------------+</span>
-<span style="color: #FF007C">|</span> <span style="color: #FF9F1C">/home/geek/picoruby/calc.rb</span> <span style="color: #FF007C">|</span>
-<span style="color: #FF007C">+--------------------------------------+</span>
+**[View Live Preview →](preview/geek_preview.html)**
 
-<span style="color: #FF007C">[ INPUT ]</span>
-<span style="color: #FF9F1C">></span> <span style="color: #F7F7FF">2+2_</span>
-<span style="color: #3A1C71">----------------------------------------</span>
-<span style="color: #FF007C">[ OUTPUT ]</span>
-<span style="color: #FF9F1C">=></span> <span style="color: #F7F7FF">4</span>
-<span style="color: #3A1C71">________________________________________</span>
-```
+**Colors:** `#FF007C` Hot Magenta • `#FF9F1C` Neon Orange • `#F7F7FF` White • `#3A1C71` Dark Purple
 
 ### 📋 Default Theme
 A clean, classic terminal-style interface with standard colors.
@@ -115,6 +99,8 @@ A clean, classic terminal-style interface with standard colors.
 ```bash
 make list-themes              # List available themes
 make apply-theme THEME=geek   # Apply geek theme
+make apply-theme THEME=sakura # Apply sakura theme
+make apply-theme THEME=default # Apply default theme
 ```
 
 ---
