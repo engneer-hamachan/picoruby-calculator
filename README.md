@@ -51,7 +51,19 @@ M5GFX
 conf.gem File.expand_path('../../../picoruby-m5unified', __dir__)
 ```
 
-### 4️⃣ Build and flash 🔥
+### 4️⃣ Apply theme 🎨
+
+Choose and apply a theme for your calculator:
+
+```bash
+# List available themes
+make list-themes
+
+# Apply your chosen theme (e.g., default or geek)
+make apply-theme THEME=default
+```
+
+### 5️⃣ Build and flash 🔥
 
 ```bash
 . $(YOUR_ESP_IDF_PATH)/export.sh

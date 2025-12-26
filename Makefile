@@ -1,27 +1,22 @@
 .PHONY: apply-theme list-themes help
 
-# デフォルトのテーマディレクトリとアプリファイルパス
 THEME_DIR = theme
 APP_FILE = main/mrblib/app.rb
 
-# ヘルプメッセージ
 help:
 	@echo "Available commands:"
-	@echo "  make apply-theme THEME=<theme_name>  - テーマをapp.rbに適用"
-	@echo "  make list-themes                      - 利用可能なテーマを表示"
+	@echo "  make apply-theme THEME=<theme_name>"
+	@echo "  make list-themes"
 	@echo ""
 	@echo "Examples:"
-	@echo "  make apply-theme THEME=sakura"
 	@echo "  make apply-theme THEME=geek"
 
-# 利用可能なテーマを表示
 list-themes:
 	@echo "Available themes:"
 	@for theme in $(THEME_DIR)/*_app.rb; do \
 		basename $$theme _app.rb; \
 	done
 
-# テーマを適用
 apply-theme:
 ifndef THEME
 	@echo "Error: THEME parameter is required"
