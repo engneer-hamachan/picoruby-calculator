@@ -59,7 +59,7 @@ Choose and apply a theme for your calculator:
 # List available themes
 make list-themes
 
-# Apply your chosen theme (e.g., default or geek)
+# Apply your chosen theme (e.g., default or cyber_retro)
 make apply-theme THEME=default
 ```
 
@@ -85,22 +85,22 @@ A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tone
 
 **[Sakura Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/sakura_preview.html)**
 
-### 🌃 Geek Theme
+### 🌃 Cyber Retro Theme
 A vibrant theme with hot magenta and neon orange - retro arcade energy!
 
-![Geek Theme](image/geek-theme.png)
+![Cyber Retro Theme](image/cyber-retro-theme.png)
 
-**[Geek Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/geek_preview.html)**
+**[Cyber Retro Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/cyber_retro_preview.html)**
 
 ### 📋 Default Theme
 A clean, classic terminal-style interface with standard colors.
 
 **To switch themes:**
 ```bash
-make list-themes              # List available themes
-make apply-theme THEME=geek   # Apply geek theme
-make apply-theme THEME=sakura # Apply sakura theme
-make apply-theme THEME=default # Apply default theme
+make list-themes                    # List available themes
+make apply-theme THEME=cyber_retro  # Apply cyber retro theme
+make apply-theme THEME=sakura       # Apply sakura theme
+make apply-theme THEME=default      # Apply default theme
 ```
 
 ---
