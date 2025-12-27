@@ -51,13 +51,56 @@ M5GFX
 conf.gem File.expand_path('../../../picoruby-m5unified', __dir__)
 ```
 
-### 4️⃣ Build and flash 🔥
+### 4️⃣ Apply theme 🎨
+
+Choose and apply a theme for your calculator:
+
+```bash
+# List available themes
+make list-themes
+
+# Apply your chosen theme (e.g., default or geek)
+make apply-theme THEME=default
+```
+
+### 5️⃣ Build and flash 🔥
 
 ```bash
 . $(YOUR_ESP_IDF_PATH)/export.sh
 idf.py set-target esp32s3
 idf.py build
 idf.py flash
+```
+
+---
+
+## 🎨 Themes
+
+This calculator comes with multiple themes to customize your experience:
+
+### 🌸 Sakura Theme
+A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tones.
+
+![Sakura Theme](image/sakura-theme.png)
+
+**[Sakura Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/sakura_preview.html)**
+
+### 🌃 Geek Theme
+A vibrant theme with hot magenta and neon orange - retro arcade energy!
+
+![Geek Theme](image/geek-theme.png)
+
+**[Geek Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/geek_preview.html)**
+
+### 📋 Default Theme
+A clean, classic terminal-style interface with standard colors.
+
+**To switch themes:**
+```bash
+make list-themes              # List available themes
+make apply-theme THEME=geek   # Apply geek theme
+make apply-theme THEME=sakura # Apply sakura theme
+make apply-theme THEME=default # Apply default theme
 ```
 
 ---
