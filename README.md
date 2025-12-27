@@ -83,18 +83,14 @@ A soft, elegant theme inspired by Japanese cherry blossoms with pastel pink tone
 
 ![Sakura Theme](image/sakura-theme.png)
 
-**Colors:** `#FFB6C1` Sakura Pink • `#FFC8DC` Light Pink • `#FFFDF0` Cream • `#FFE4EB` Pale Sakura
-
-**[Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/sakura_preview.html)**
+**[Sakura Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/sakura_preview.html)**
 
 ### 🌃 Geek Theme
 A vibrant theme with hot magenta and neon orange - retro arcade energy!
 
 ![Geek Theme](image/geek-theme.png)
 
-**Colors:** `#FF007C` Hot Magenta • `#FF9F1C` Neon Orange • `#F7F7FF` White • `#3A1C71` Dark Purple
-
-**[Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/geek_preview.html)**
+**[Geek Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/geek_preview.html)**
 
 ### 📋 Default Theme
 A clean, classic terminal-style interface with standard colors.
