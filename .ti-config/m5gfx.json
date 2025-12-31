@@ -328,7 +328,7 @@
           "Nil"
         ]
       },
-      "document": "Draw pixel"
+      "document": "Draw pixel (x, y, color)"
     },
     {
       "name": "draw_fast_v_line",
@@ -359,7 +359,7 @@
           "Nil"
         ]
       },
-      "document": "Draw vertical line quickly"
+      "document": "Draw vertical line quickly (x, y, height, color)"
     },
     {
       "name": "draw_fast_h_line",
@@ -390,7 +390,7 @@
           "Nil"
         ]
       },
-      "document": "Draw horizontal line quickly"
+      "document": "Draw horizontal line quickly (x, y, width, color)"
     },
     {
       "name": "draw_rect",
@@ -426,7 +426,7 @@
           "Nil"
         ]
       },
-      "document": "Draw rectangle outline"
+      "document": "Draw rectangle outline (x, y, w, h, color)"
     },
     {
       "name": "draw_round_rect",
@@ -467,7 +467,7 @@
           "Nil"
         ]
       },
-      "document": "Draw rounded rectangle outline"
+      "document": "Draw rounded rectangle outline (x, y, w, h, radius, color)"
     },
     {
       "name": "draw_circle",
@@ -498,7 +498,7 @@
           "Nil"
         ]
       },
-      "document": "Draw circle outline"
+      "document": "Draw circle outline (center_x, center_y, radius, color)"
     },
     {
       "name": "draw_ellipse",
@@ -534,7 +534,7 @@
           "Nil"
         ]
       },
-      "document": "Draw ellipse outline"
+      "document": "Draw ellipse outline (center_x, center_y, radius_x, radius_y, color)"
     },
     {
       "name": "draw_line",
@@ -570,7 +570,7 @@
           "Nil"
         ]
       },
-      "document": "Draw line"
+      "document": "Draw line (x0, y0, x1, y1, color)"
     },
     {
       "name": "draw_triangle",
@@ -616,7 +616,7 @@
           "Nil"
         ]
       },
-      "document": "Draw triangle outline"
+      "document": "Draw triangle outline (x0, y0, x1, y1, x2, y2, color)"
     },
     {
       "name": "draw_bezier",
@@ -758,7 +758,7 @@
           "Nil"
         ]
       },
-      "document": "Draw smooth line (with anti-aliasing)"
+      "document": "Draw smooth line with anti-aliasing (x0, y0, x1, y1, color)"
     },
     {
       "name": "draw_wide_line",
@@ -844,7 +844,7 @@
           "Nil"
         ]
       },
-      "document": "Draw string"
+      "document": "Draw string (text, x, y)"
     },
     {
       "name": "draw_number",
@@ -870,7 +870,7 @@
           "Nil"
         ]
       },
-      "document": "Draw number"
+      "document": "Draw number (number, x, y)"
     },
     {
       "name": "draw_float",
@@ -906,7 +906,7 @@
           "Nil"
         ]
       },
-      "document": "Draw string with center alignment"
+      "document": "Draw string with center alignment (text, x, y)"
     },
     {
       "name": "draw_center_string",
@@ -932,7 +932,7 @@
           "Nil"
         ]
       },
-      "document": "Draw string with center alignment"
+      "document": "Draw string with center alignment (text, x, y)"
     },
     {
       "name": "draw_right_string",
@@ -958,7 +958,7 @@
           "Nil"
         ]
       },
-      "document": "Draw string with right alignment"
+      "document": "Draw string with right alignment (text, x, y)"
     },
     {
       "name": "draw_char",
@@ -984,7 +984,7 @@
           "Nil"
         ]
       },
-      "document": "Draw character"
+      "document": "Draw character (unicode, x, y)"
     },
     {
       "name": "set_cursor",
@@ -1005,7 +1005,7 @@
           "Nil"
         ]
       },
-      "document": "Set cursor position"
+      "document": "Set cursor position (x, y)"
     },
     {
       "name": "get_cursor_x",
@@ -1340,7 +1340,7 @@
     },
     {
       "name": "fill_rect",
-      "document": "Draw filled rectangle",
+      "document": "Fill rectangle (x, y, w, h, color)",
       "arguments": [
         {
           "type": [
@@ -1413,7 +1413,7 @@
           "Nil"
         ]
       },
-      "document": "Draw filled circle"
+      "document": "Fill circle (center_x, center_y, radius, color)"
     },
     {
       "name": "fill_ellipse",
@@ -1469,7 +1469,7 @@
           "Nil"
         ]
       },
-      "document": "Draw filled triangle"
+      "document": "Fill triangle (x0, y0, x1, y1, x2, y2, color)"
     },
     {
       "name": "fill_ellipse_arc",
@@ -1555,7 +1555,7 @@
           "Nil"
         ]
       },
-      "document": "Fill entire screen"
+      "document": "Fill entire screen (color)"
     },
     {
       "name": "color16to8",
@@ -1998,7 +1998,7 @@
           "Nil"
         ]
       },
-      "document": "Copy rectangular region"
+      "document": "Copy rectangular region (dst_x, dst_y, w, h, src_x, src_y)"
     },
     {
       "name": "scroll",
@@ -2019,7 +2019,7 @@
           "Nil"
         ]
       },
-      "document": "Scroll screen"
+      "document": "Scroll screen (dx, dy)"
     },
     {
       "name": "start_write",

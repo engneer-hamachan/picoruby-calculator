@@ -220,7 +220,7 @@ def draw_static_ui(disp)
   disp.draw_string '[ OUTPUT ]', 0, 80
   disp.set_text_color 0xFF9F1C
   disp.draw_string '=>', 0, 95
-  disp.draw_string '=>', 0, 105
+  disp.draw_string '=>', 0, 110
 
   # Footer
   disp.set_text_color 0x3A1C71
@@ -272,11 +272,11 @@ loop do
 
   # draw result area
   if res.to_s != prev_res || code_executed.to_s != prev_code_executed
-    disp.fill_rect 18, 95, 222, 20, 0x000000
+    disp.fill_rect 18, 95, 222, 25, 0x000000
     disp.set_text_color 0x3A1C71
     disp.draw_string " #{code_executed}", 18, 95
     disp.set_text_color 0xF7F7FF
-    disp.draw_string " #{res}", 18, 105
+    disp.draw_string " #{res}", 18, 110
     prev_res = res.to_s
     prev_code_executed = code_executed.to_s
   end
