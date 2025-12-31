@@ -261,13 +261,14 @@ loop do
   M5.update
 
   # draw input area
-  code_display = " #{code}_"
+  code_display = " #{code}"
 
   if code_display != prev_code_display || is_need_redraw_input
+    disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
+
     disp.set_text_color 0xFF007C
     disp.draw_string '>', 0, CURSOR_Y
 
-    disp.fill_rect 12, CURSOR_Y, 228, 10, 0x000000
 
     disp.set_text_color 0xF7F7FF
     disp.draw_string code_display, 12, CURSOR_Y
@@ -279,7 +280,7 @@ loop do
 
   # draw result area
   if res.to_s != prev_res || code_executed.to_s != prev_code_executed
-    disp.fill_rect 18, 110, 222, 6, 0x000000
+    disp.fill_rect 18, 110, 222, 8, 0x000000
     disp.set_text_color 0xF7F7FF
     disp.draw_string " #{res}", 18, 110
     prev_res = res.to_s
