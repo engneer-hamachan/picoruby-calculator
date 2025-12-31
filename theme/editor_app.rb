@@ -261,7 +261,7 @@ loop do
   M5.update
 
   # draw input area
-  code_display = " #{code}"
+  code_display = " #{code}_"
 
   if code_display != prev_code_display || is_need_redraw_input
     disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
@@ -307,6 +307,12 @@ loop do
     execute_code << '; '
 
     if !is_shift
+      disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
+      disp.set_text_color 0xFF007C
+      disp.draw_string '*', 0, CURSOR_Y
+      disp.set_text_color 0xF7F7FF
+      disp.draw_string code, 18, CURSOR_Y
+
       code = ''
       CURSOR_Y += 10
 
