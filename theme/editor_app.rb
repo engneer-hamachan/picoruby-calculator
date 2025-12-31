@@ -300,13 +300,13 @@ loop do
 
   key_input = get_input
 
-  if key_input == 'ret' && code != '' && !is_input
+  if key_input == 'ret' && (code != '' || execute_code != '') && !is_input
     is_input = true
 
     execute_code << code
     execute_code << '; '
 
-    if !is_shift
+    if !is_shift && code != ''
       disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
       disp.set_text_color 0xFF007C
       disp.draw_string '*', 0, CURSOR_Y
@@ -317,6 +317,14 @@ loop do
       CURSOR_Y += 10
 
       next
+    end
+
+    if code == ''
+      disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
+      disp.set_text_color 0xFF007C
+      disp.draw_string '*', 0, CURSOR_Y
+      disp.set_text_color 0xF7F7FF
+      disp.draw_string '[RUN]', 18, CURSOR_Y
     end
 
     is_shift = false
