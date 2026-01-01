@@ -196,17 +196,41 @@ CURSOR_Y = 35
 CURSOR_Y_MAX = 100
 
 
+# ti-doc: Check if a string is a number
+def is_number?(str)
+  return false if str == ''
+  str.each_char do |c|
+    return false if c < '0' || c > '9'
+  end
+  true
+end
+
 # ti-doc: Draw code with syntax highlighting
 def draw_code_with_highlight(disp, code_str, x, y)
   x_pos = x
   keywords = ['def', 'class', 'end', 'if', 'elsif', 'else', 'unless', 'case', 'when', 'while', 'until', 'for', 'do', 'begin', 'rescue', 'ensure', 'return', 'yield', 'break', 'next']
 
-  # Split code into tokens
+  # Split code into tokens, handling string literals
   tokens = []
   current_token = ''
+  in_string = false
+  string_char = ''
 
   code_str.each_char do |c|
-    if c == ' ' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ',' || c == ';' || c == '_'
+    if in_string
+      current_token << c
+      if c == string_char
+        tokens << current_token
+        current_token = ''
+        in_string = false
+        string_char = ''
+      end
+    elsif c == "'" || c == '"'
+      tokens << current_token if current_token != ''
+      current_token = c
+      in_string = true
+      string_char = c
+    elsif c == ' ' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ',' || c == ';' || c == '_'
       tokens << current_token if current_token != ''
       tokens << c
       current_token = ''
@@ -218,7 +242,13 @@ def draw_code_with_highlight(disp, code_str, x, y)
 
   # Draw each token with appropriate color
   tokens.each do |token|
-    if keywords.include?(token)
+    if token.length > 0 && (token[0] == "'" || token[0] == '"')
+      # String literal color (green)
+      disp.set_text_color 0x2EC4B6
+    elsif is_number?(token)
+      # Number color (orange)
+      disp.set_text_color 0xFF9F1C
+    elsif keywords.include?(token)
       # Keyword color (pink/magenta)
       disp.set_text_color 0xFF007C
     else
