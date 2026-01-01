@@ -453,7 +453,7 @@ loop do
     is_input = true
 
     execute_code << code
-    execute_code << '; '
+    execute_code << "\n"
 
     if !is_shift && code != ''
       tokens = tokenize code
