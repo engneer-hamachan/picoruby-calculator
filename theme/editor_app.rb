@@ -347,13 +347,15 @@ loop do
       disp.set_text_color 0xFF007C
       disp.draw_string '*', 0, CURSOR_Y
 
-      if code.include?('end')
-        indent_ct = indent_ct - 1
+      if code.include?('end') || code.include?('else') || code.include?('elsif') || code.include?('when')
+        if indent_ct > 0
+          indent_ct = indent_ct - 1
+        end
       end
 
       draw_code_with_highlight disp, "#{'  ' * indent_ct}#{code}", 12, CURSOR_Y
 
-      if code.include?('class') || code.include?('def')
+      if code.include?('class') || code.include?('def') || code.include?('if') || code.include?('elsif') || code.include?('else') || code.include?('do') || code.include?('case') || code.include?('when')
         indent_ct = indent_ct + 1
       end
 
@@ -367,7 +369,7 @@ loop do
       disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
       disp.set_text_color 0xFF007C
       disp.draw_string '*', 0, CURSOR_Y
-      disp.set_text_color 0xF7F7FF
+      disp.set_text_color 0x3A1C71
       disp.draw_string '[RUN]', 12, CURSOR_Y
     end
 
