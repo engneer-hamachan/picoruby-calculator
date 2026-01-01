@@ -204,18 +204,15 @@ def is_number?(str)
   true
 end
 
-# ti-doc: Draw code with syntax highlighting
-def draw_code_with_highlight(disp, code_str, x, y)
-  x_pos = x
-  keywords = ['def', 'class', 'end', 'if', 'elsif', 'else', 'unless', 'case', 'when', 'while', 'until', 'for', 'do', 'begin', 'rescue', 'ensure', 'return', 'yield', 'break', 'next']
-
+# ti-doc: Split code into tokens, handling string literals
+def tokenize code
   # Split code into tokens, handling string literals
   tokens = []
   current_token = ''
   in_string = false
   string_char = ''
 
-  code_str.each_char do |c|
+  code.each_char do |c|
     if in_string
       current_token << c
       if c == string_char
@@ -237,7 +234,18 @@ def draw_code_with_highlight(disp, code_str, x, y)
       current_token << c
     end
   end
+
   tokens << current_token if current_token != ''
+
+  tokens
+end
+
+# ti-doc: Draw code with syntax highlighting
+def draw_code_with_highlight(disp, code_str, x, y)
+  x_pos = x
+  keywords = ['def', 'class', 'end', 'if', 'elsif', 'else', 'unless', 'case', 'when', 'while', 'until', 'for', 'do', 'begin', 'rescue', 'ensure', 'return', 'yield', 'break', 'next']
+
+  tokens = tokenize code_str
 
   # Draw each token with appropriate color
   tokens.each do |token|
@@ -419,19 +427,32 @@ loop do
     execute_code << '; '
 
     if !is_shift && code != ''
+      tokens = tokenize code
+
       # Adjust indent before adding to history
-      if code.include?('end') || code.include?('else') || code.include?('elsif') || code.include?('when')
-        if indent_ct > 0
-          indent_ct = indent_ct - 1
+      target_tokens = ['end', 'else', 'elsif', 'when']
+
+      tokens.each do |token|
+        if target_tokens.include? token
+          if indent_ct > 0
+            indent_ct = indent_ct - 1
+          end
+
+          break
         end
       end
 
       # Add line to history
       code_lines << {text: code, indent: indent_ct}
 
+      target_tokens = ['class', 'def', 'if', 'elsif', 'else', 'do', 'case', 'when']
+
       # Adjust indent for next line
-      if code.include?('class') || code.include?('def') || code.include?('if') || code.include?('elsif') || code.include?('else') || code.include?('do') || code.include?('case') || code.include?('when')
-        indent_ct = indent_ct + 1
+      tokens.each do |token|
+        if target_tokens.include? token
+          indent_ct = indent_ct + 1
+          break
+        end
       end
 
       code = ''
