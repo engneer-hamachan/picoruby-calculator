@@ -230,7 +230,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
       current_token = c
       in_string = true
       string_char = c
-    elsif c == ' ' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ',' || c == ';' || c == '_'
+    elsif c == ' ' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ',' || c == ';' || c == '_' || c == '.'
       tokens << current_token if current_token != ''
       tokens << c
       current_token = ''
@@ -251,6 +251,9 @@ def draw_code_with_highlight(disp, code_str, x, y)
     elsif keywords.include?(token)
       # Keyword color (pink/magenta)
       disp.set_text_color 0xFF007C
+    elsif token.length > 0 && token[0] >= 'A' && token[0] <= 'Z'
+      # Capitalized words (green)
+      disp.set_text_color 0x00FF00
     else
       # Normal text color (white)
       disp.set_text_color 0xF7F7FF
