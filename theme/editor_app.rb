@@ -226,7 +226,12 @@ def tokenize code
       tokens << current_token if current_token != ''
       current_token = c
       in_string = true
-      string_char = c
+
+      if c == "'"
+        string_char = "'"
+      else
+        string_char = '"'
+      end
     elsif token_ends.include?(c)
       tokens << current_token if current_token != ''
       tokens << c
