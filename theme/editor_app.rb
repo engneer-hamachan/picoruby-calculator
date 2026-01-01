@@ -195,6 +195,7 @@ CURSOR_X = 0
 CURSOR_Y = 35
 CURSOR_Y_MAX = 100
 
+
 # ti-doc: Draw static UI elements
 def draw_static_ui(disp)
   # Header
@@ -215,7 +216,7 @@ def draw_static_ui(disp)
 
   # Separator
   disp.set_text_color 0x3A1C71
-  disp.draw_string '-' * 40, 0, 100
+  disp.draw_string '_' * 40, 0, 100
 
   # Result
   disp.set_text_color 0xFF9F1C
@@ -244,6 +245,7 @@ prev_res = ''
 code_executed = ''
 prev_code_executed = ''
 prev_status = ''
+indent_ct = 0
 
 # M5 start
 M5.begin
@@ -261,17 +263,18 @@ loop do
   M5.update
 
   # draw input area
-  code_display = " #{code}_"
+  indent = '  ' * indent_ct
+  code_display = "#{' ' * indent_ct}#{code}_"
 
   if code_display != prev_code_display || is_need_redraw_input
-    disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
+    disp.fill_rect 0, CURSOR_Y, 240, 110 - CURSOR_Y, 0x000000
 
     disp.set_text_color 0xFF007C
     disp.draw_string '>', 0, CURSOR_Y
 
 
     disp.set_text_color 0xF7F7FF
-    disp.draw_string code_display, 12, CURSOR_Y
+    disp.draw_string code_display, 12 + (indent_ct * 6), CURSOR_Y
 
     prev_code_display = code_display
 
@@ -311,7 +314,16 @@ loop do
       disp.set_text_color 0xFF007C
       disp.draw_string '*', 0, CURSOR_Y
       disp.set_text_color 0xF7F7FF
-      disp.draw_string code, 18, CURSOR_Y
+
+      if code.include?('end')
+        indent_ct = indent_ct - 1
+      end
+
+      disp.draw_string "#{'  ' * indent_ct}#{code}", 12, CURSOR_Y
+
+      if code.include?('class') || code.include?('def')
+        indent_ct = indent_ct + 1
+      end
 
       code = ''
       CURSOR_Y += 10
