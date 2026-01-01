@@ -211,6 +211,7 @@ def tokenize code
   current_token = ''
   in_string = false
   string_char = ''
+  token_ends = [' ', '(', ')', '{', '}', '[', ']', ',', ';', '_' , '.']
 
   code.each_char do |c|
     if in_string
@@ -226,7 +227,7 @@ def tokenize code
       current_token = c
       in_string = true
       string_char = c
-    elsif c == ' ' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ',' || c == ';' || c == '_' || c == '.'
+    elsif token_ends.include?(c)
       tokens << current_token if current_token != ''
       tokens << c
       current_token = ''
@@ -243,7 +244,28 @@ end
 # ti-doc: Draw code with syntax highlighting
 def draw_code_with_highlight(disp, code_str, x, y)
   x_pos = x
-  keywords = ['def', 'class', 'end', 'if', 'elsif', 'else', 'unless', 'case', 'when', 'while', 'until', 'for', 'do', 'begin', 'rescue', 'ensure', 'return', 'yield', 'break', 'next']
+  keywords = [
+    'def',
+    'class',
+    'end',
+    'if',
+    'elsif',
+    'else',
+    'unless',
+    'case',
+    'when',
+    'while',
+    'until',
+    'for',
+    'do',
+    'begin',
+    'rescue',
+    'ensure',
+    'return',
+    'yield',
+    'break',
+    'next'
+  ]
 
   tokens = tokenize code_str
 
@@ -299,7 +321,14 @@ def draw_static_ui(disp)
 end
 
 # ti-doc: Redraw code area with scroll offset
-def redraw_code_area(disp, code_lines, scroll_offset, max_visible_lines, current_code, indent_ct)
+def redraw_code_area(
+  disp,
+  code_lines,
+  scroll_offset,
+  max_visible_lines,
+  current_code,
+  indent_ct
+)
   code_area_start = CODE_AREA_Y_START
   code_area_height = CODE_AREA_Y_END - CODE_AREA_Y_START
 
