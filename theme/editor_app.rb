@@ -253,7 +253,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
       disp.set_text_color 0xFF007C
     elsif token.length > 0 && token[0] >= 'A' && token[0] <= 'Z'
       # Capitalized words (green)
-      disp.set_text_color 0x00FF00
+      disp.set_text_color 0x009000
     else
       # Normal text color (white)
       disp.set_text_color 0xF7F7FF
