@@ -399,7 +399,7 @@
       ],
       "return_type": {
         "type": [
-          "OptionalUnify",
+          "Unify",
           "Self"
         ],
         "is_conditional": true

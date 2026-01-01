@@ -191,9 +191,8 @@ def get_input
   ''
 end
 
-CURSOR_X = 0
-CURSOR_Y = 35
-CURSOR_Y_MAX = 100
+CODE_AREA_Y_START = 35
+CODE_AREA_Y_END = 100
 
 
 # ti-doc: Check if a string is a number
@@ -253,7 +252,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
       disp.set_text_color 0xFF007C
     elsif token.length > 0 && token[0] >= 'A' && token[0] <= 'Z'
       # Capitalized words (green)
-      disp.set_text_color 0x00F000
+      disp.set_text_color 0x009A00
     else
       # Normal text color (white)
       disp.set_text_color 0xF7F7FF
@@ -278,10 +277,6 @@ def draw_static_ui(disp)
   disp.set_text_color 0xFF007C
   disp.draw_string '+' + '-' * 38 + '+', 0, 20
 
-  # Input section
-  disp.set_text_color 0xFF007C
-  disp.draw_string '>', 0, CURSOR_Y
-
   # Separator
   disp.set_text_color 0x3A1C71
   disp.draw_string '_' * 40, 0, 100
@@ -293,6 +288,47 @@ def draw_static_ui(disp)
   # Footer
   disp.set_text_color 0x3A1C71
   disp.draw_string '_' * 40, 0, 115
+end
+
+# ti-doc: Redraw code area with scroll offset
+def redraw_code_area(disp, code_lines, scroll_offset, max_visible_lines, current_code, indent_ct)
+  code_area_start = CODE_AREA_Y_START
+  code_area_height = CODE_AREA_Y_END - CODE_AREA_Y_START
+
+  # Clear code area
+  disp.fill_rect 0, code_area_start, 240, code_area_height, 0x000000
+
+  # Calculate which lines to show (reserve 1 line for input)
+  total_lines = code_lines.length
+  max_history_lines = max_visible_lines - 1
+  start_line = [0, total_lines - max_history_lines].max
+ 
+  # Draw history lines
+  y_pos = code_area_start
+  (start_line...total_lines).each do |i|
+    line_data = code_lines[i]
+    disp.set_text_color 0xFF007C
+
+    # Special marker for [RUN]
+    if line_data[:text] == '[RUN]'
+      disp.draw_string '*', 0, y_pos
+      disp.set_text_color 0x3A1C71
+      disp.draw_string '[RUN]', 12, y_pos
+    else
+      disp.draw_string '*', 0, y_pos
+      draw_code_with_highlight disp, "#{'  ' * line_data[:indent]}#{line_data[:text]}", 12, y_pos
+    end
+
+    y_pos += 10
+  end
+
+  # Draw current input line
+  if y_pos <= CODE_AREA_Y_END - 10
+    disp.set_text_color 0xFF007C
+    disp.draw_string '>', 0, y_pos
+    code_display = "#{'  ' * indent_ct}#{current_code}_"
+    draw_code_with_highlight disp, code_display, 12, y_pos
+  end
 end
 
 # define adc object for battery display
@@ -314,6 +350,9 @@ code_executed = ''
 prev_code_executed = ''
 prev_status = ''
 indent_ct = 0
+code_lines = []  # History of code lines with {text: "", indent: 0}
+scroll_offset = 0  # How many lines scrolled
+max_visible_lines = 6  # Max lines visible in code area (35-95px, 10px per line)
 
 # M5 start
 M5.begin
@@ -324,6 +363,7 @@ disp.set_text_size 1
 
 # initial draw
 draw_static_ui(disp)
+redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct
 
 execute_code = ''
 
@@ -331,16 +371,10 @@ loop do
   M5.update
 
   # draw input area
-  indent = '  ' * indent_ct
-  code_display = "#{' ' * indent_ct}#{code}_"
+  code_display = "#{code}"
 
   if code_display != prev_code_display || is_need_redraw_input
-    disp.fill_rect 0, CURSOR_Y, 240, 103 - CURSOR_Y, 0x000000
-
-    disp.set_text_color 0xFF007C
-    disp.draw_string '>', 0, CURSOR_Y
-
-    draw_code_with_highlight disp, code_display, 12 + (indent_ct * 6), CURSOR_Y
+    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct
 
     prev_code_display = code_display
 
@@ -376,34 +410,32 @@ loop do
     execute_code << '; '
 
     if !is_shift && code != ''
-      disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
-      disp.set_text_color 0xFF007C
-      disp.draw_string '*', 0, CURSOR_Y
-
+      # Adjust indent before adding to history
       if code.include?('end') || code.include?('else') || code.include?('elsif') || code.include?('when')
         if indent_ct > 0
           indent_ct = indent_ct - 1
         end
       end
 
-      draw_code_with_highlight disp, "#{'  ' * indent_ct}#{code}", 12, CURSOR_Y
+      # Add line to history
+      code_lines << {text: code, indent: indent_ct}
 
+      # Adjust indent for next line
       if code.include?('class') || code.include?('def') || code.include?('if') || code.include?('elsif') || code.include?('else') || code.include?('do') || code.include?('case') || code.include?('when')
         indent_ct = indent_ct + 1
       end
 
       code = ''
-      CURSOR_Y += 10
+
+      # Redraw code area with scroll
+      redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct
 
       next
     end
 
     if code == ''
-      disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
-      disp.set_text_color 0xFF007C
-      disp.draw_string '*', 0, CURSOR_Y
-      disp.set_text_color 0x3A1C71
-      disp.draw_string '[RUN]', 12, CURSOR_Y
+      # Add [RUN] marker to history
+      code_lines << {text: '[RUN]', indent: 0}
     end
 
     is_shift = false
@@ -415,7 +447,8 @@ loop do
       res = 'syntax error'
       code = ''
       execute_code = ''
-      CURSOR_Y = 35
+      code_lines = []
+      indent_ct = 0
 
       next
     end
@@ -434,7 +467,11 @@ loop do
 
     code = ''
     execute_code = ''
-    CURSOR_Y = 35
+    code_lines = []
+    indent_ct = 0
+
+    # Redraw code area (clear it)
+    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct
 
     next
   end
