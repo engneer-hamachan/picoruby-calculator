@@ -384,8 +384,17 @@ loop do
   # draw result area
   if res.to_s != prev_res || code_executed.to_s != prev_code_executed
     disp.fill_rect 18, 110, 222, 8, 0x000000
-    disp.set_text_color 0xF7F7FF
+
+    if res.class == Integer
+      disp.set_text_color 0x5B9FED
+    elsif res.class == String
+      disp.set_text_color 0xFF9F1C
+    else
+      disp.set_text_color 0xF7F7FF
+    end
+
     disp.draw_string " #{res}", 18, 110
+
     prev_res = res.to_s
     prev_code_executed = code_executed.to_s
   end
