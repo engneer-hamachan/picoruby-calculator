@@ -267,7 +267,7 @@ loop do
   code_display = "#{' ' * indent_ct}#{code}_"
 
   if code_display != prev_code_display || is_need_redraw_input
-    disp.fill_rect 0, CURSOR_Y, 240, 110 - CURSOR_Y, 0x000000
+    disp.fill_rect 0, CURSOR_Y, 240, 103 - CURSOR_Y, 0x000000
 
     disp.set_text_color 0xFF007C
     disp.draw_string '>', 0, CURSOR_Y
@@ -336,7 +336,7 @@ loop do
       disp.set_text_color 0xFF007C
       disp.draw_string '*', 0, CURSOR_Y
       disp.set_text_color 0xF7F7FF
-      disp.draw_string '[RUN]', 18, CURSOR_Y
+      disp.draw_string '[RUN]', 12, CURSOR_Y
     end
 
     is_shift = false
