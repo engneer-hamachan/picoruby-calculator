@@ -243,11 +243,11 @@ def draw_code_with_highlight(disp, code_str, x, y)
   # Draw each token with appropriate color
   tokens.each do |token|
     if token.length > 0 && (token[0] == "'" || token[0] == '"')
-      # String literal color (green)
-      disp.set_text_color 0x2EC4B6
-    elsif is_number?(token)
-      # Number color (orange)
+      # String literal color (orange)
       disp.set_text_color 0xFF9F1C
+    elsif is_number?(token)
+      # Number color (blue)
+      disp.set_text_color 0x5B9FED
     elsif keywords.include?(token)
       # Keyword color (pink/magenta)
       disp.set_text_color 0xFF007C
