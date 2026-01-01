@@ -196,6 +196,41 @@ CURSOR_Y = 35
 CURSOR_Y_MAX = 100
 
 
+# ti-doc: Draw code with syntax highlighting
+def draw_code_with_highlight(disp, code_str, x, y)
+  x_pos = x
+  keywords = ['def', 'class', 'end', 'if', 'elsif', 'else', 'unless', 'case', 'when', 'while', 'until', 'for', 'do', 'begin', 'rescue', 'ensure', 'return', 'yield', 'break', 'next']
+
+  # Split code into tokens
+  tokens = []
+  current_token = ''
+
+  code_str.each_char do |c|
+    if c == ' ' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ',' || c == ';' || c == '_'
+      tokens << current_token if current_token != ''
+      tokens << c
+      current_token = ''
+    else
+      current_token << c
+    end
+  end
+  tokens << current_token if current_token != ''
+
+  # Draw each token with appropriate color
+  tokens.each do |token|
+    if keywords.include?(token)
+      # Keyword color (pink/magenta)
+      disp.set_text_color 0xFF007C
+    else
+      # Normal text color (white)
+      disp.set_text_color 0xF7F7FF
+    end
+
+    disp.draw_string token, x_pos, y
+    x_pos += token.length * 6
+  end
+end
+
 # ti-doc: Draw static UI elements
 def draw_static_ui(disp)
   # Header
@@ -272,9 +307,7 @@ loop do
     disp.set_text_color 0xFF007C
     disp.draw_string '>', 0, CURSOR_Y
 
-
-    disp.set_text_color 0xF7F7FF
-    disp.draw_string code_display, 12 + (indent_ct * 6), CURSOR_Y
+    draw_code_with_highlight disp, code_display, 12 + (indent_ct * 6), CURSOR_Y
 
     prev_code_display = code_display
 
@@ -313,13 +346,12 @@ loop do
       disp.fill_rect 0, CURSOR_Y, 240, 100 - CURSOR_Y, 0x000000
       disp.set_text_color 0xFF007C
       disp.draw_string '*', 0, CURSOR_Y
-      disp.set_text_color 0xF7F7FF
 
       if code.include?('end')
         indent_ct = indent_ct - 1
       end
 
-      disp.draw_string "#{'  ' * indent_ct}#{code}", 12, CURSOR_Y
+      draw_code_with_highlight disp, "#{'  ' * indent_ct}#{code}", 12, CURSOR_Y
 
       if code.include?('class') || code.include?('def')
         indent_ct = indent_ct + 1
