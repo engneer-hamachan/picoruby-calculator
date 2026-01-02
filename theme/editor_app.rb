@@ -141,6 +141,8 @@ PATTERN =
     [1, 1, 1]
   ]
 
+CODE_AREA_Y_START = 35
+CODE_AREA_Y_END = 100
 # Constants definition end
 
 # ti-doc: Read keyboard input
@@ -191,9 +193,6 @@ def get_input
   ''
 end
 
-CODE_AREA_Y_START = 35
-CODE_AREA_Y_END = 100
-
 
 # ti-doc: Check if a string is a number
 def is_number?(str)
@@ -201,26 +200,26 @@ def is_number?(str)
   str.each_char do |c|
     return false if c < '0' || c > '9'
   end
+
   true
 end
 
-# ti-doc: Split code into tokens, handling string literals
+# ti-doc: Split code into tokens
 def tokenize code
-  # Split code into tokens, handling string literals
   tokens = []
   current_token = ''
   in_string = false
-  string_char = ''
+  string_end_char = ''
   token_ends = [' ', '(', ')', '{', '}', '[', ']', ',', ';', '.']
 
   code.each_char do |c|
     if in_string
       current_token << c
-      if c == string_char
+      if c == string_end_char
         tokens << current_token
         current_token = ''
         in_string = false
-        string_char = ''
+        string_end_char = ''
       end
     elsif c == "'" || c == '"'
       tokens << current_token if current_token != ''
@@ -228,9 +227,9 @@ def tokenize code
       in_string = true
 
       if c == "'"
-        string_char = "'"
+        string_end_char = "'"
       else
-        string_char = '"'
+        string_end_char = '"'
       end
     elsif token_ends.include?(c)
       tokens << current_token if current_token != ''
@@ -273,7 +272,6 @@ def draw_code_with_highlight(disp, code_str, x, y)
     'break',
     'next',
     'redo',
-    'retry',
     'and',
     'or',
     'not',
@@ -281,49 +279,45 @@ def draw_code_with_highlight(disp, code_str, x, y)
     'attr_accessor',
     'attr_reader',
     'attr_writer',
-    'alias',
-    'undef',
-    '__FILE__',
-    '__LINE__',
-    '__ENCODING__'
+    'alias'
   ]
 
   tokens = tokenize code_str
 
-  # Draw each token with appropriate color (based on codedark colorscheme)
+  # Draw each token with appropriate color
   tokens.each do |token|
     if token.length > 0 && (token[0] == "'" || token[0] == '"')
-      # String literal color (brown/orange) - codedark String
+      # String literal color (brown/orange)
       disp.set_text_color 0xCE9178
     elsif token.length > 0 && token[0] == ':'
-      # Symbol color (blue) - codedark Constant - :symbol format
+      # Symbol color (blue)
       disp.set_text_color 0x569CD6
     elsif token.length > 1 && token[-1] == ':'
-      # Symbol color (blue) - codedark Constant - key: format
+      # Symbol color (blue)
       disp.set_text_color 0x569CD6
     elsif token.length > 1 && token[0] == '@' && token[1] == '@'
-      # Class variable color (light blue) - codedark Identifier
+      # Class variable color (light blue)
       disp.set_text_color 0x9CDCFE
     elsif token.length > 0 && token[0] == '@'
-      # Instance variable color (light blue) - codedark Identifier
+      # Instance variable color (light blue)
       disp.set_text_color 0x9CDCFE
     elsif token.length > 0 && token[0] == '$'
-      # Global variable color (light blue) - codedark Identifier
+      # Global variable color (light blue)
       disp.set_text_color 0x9CDCFE
     elsif is_number?(token)
-      # Number color (light green) - codedark Number
+      # Number color (light green)
       disp.set_text_color 0xB5CEA8
     elsif token == 'nil' || token == 'true' || token == 'false' || token == 'self'
-      # Pseudo variables color (blue) - codedark Constant
+      # Pseudo variables color (blue)
       disp.set_text_color 0x569CD6
     elsif keywords.include?(token)
-      # Keyword color (pink) - codedark Keyword
+      # Keyword color (pink)
       disp.set_text_color 0xC586C0
     elsif token.length > 0 && token[0] >= 'A' && token[0] <= 'Z'
-      # Capitalized words (blue-green) - codedark rubyConstant
+      # Capitalized words (blue-green)
       disp.set_text_color 0x4EC9B0
     else
-      # Normal text color (white) - codedark Front
+      # Normal text color (white) 
       disp.set_text_color 0xD4D4D4
     end
 
@@ -334,12 +328,12 @@ end
 
 # ti-doc: Draw static UI elements
 def draw_static_ui(disp)
-  # Header border (unified UI color)
+  # Header border
   disp.set_text_color 0x808080
   disp.draw_string '+' + '-' * 38 + '+', 0, 0
   disp.set_text_color 0x808080
   disp.draw_string '| ', 0, 10
-  # Filename (unified UI color)
+  # Filename
   disp.set_text_color 0x808080
   disp.draw_string '/home/geek/picoruby/calc.rb', 12, 10
   disp.set_text_color 0x808080
@@ -347,15 +341,15 @@ def draw_static_ui(disp)
   disp.set_text_color 0x808080
   disp.draw_string '+' + '-' * 38 + '+', 0, 20
 
-  # Separator (unified UI color)
+  # Separator
   disp.set_text_color 0x808080
   disp.draw_string '_' * 40, 0, 100
 
-  # Result arrow (unified UI color)
+  # Result
   disp.set_text_color 0x808080
   disp.draw_string '=>', 0, 110
 
-  # Footer (unified UI color)
+  # Footer
   disp.set_text_color 0x808080
   disp.draw_string '_' * 40, 0, 115
 end
