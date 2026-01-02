@@ -362,7 +362,7 @@ def redraw_code_area(
   max_visible_lines,
   current_code,
   indent_ct,
-  display_row_number
+  current_row_number
 )
   code_area_start = CODE_AREA_Y_START
   code_area_height = CODE_AREA_Y_END - CODE_AREA_Y_START
@@ -384,14 +384,20 @@ def redraw_code_area(
     disp.set_text_color 0x808080
     line_number = i + 1
 
+    if line_number > 9
+      space_ct = 1
+    else
+      space_ct = 2
+    end
+
     # Special marker for [RUN]
     if line_data[:text] == '[RUN]'
-      disp.draw_string "* #{line_number} |", 0, y_pos
+      disp.draw_string "#{' ' * space_ct}#{line_number} |", 0, y_pos
       # [RUN] in green (comment color)
       disp.set_text_color 0x6A9955
       disp.draw_string '[RUN]', 36, y_pos
     else
-      disp.draw_string "* #{line_number} |", 0, y_pos
+      disp.draw_string "#{' ' * space_ct}#{line_number} |", 0, y_pos
       draw_code_with_highlight disp, "#{'  ' * line_data[:indent]}#{line_data[:text]}", 36, y_pos
     end
 
@@ -400,9 +406,14 @@ def redraw_code_area(
 
   # Draw current input line
   if y_pos <= CODE_AREA_Y_END - 10
+    if current_row_number > 9
+      space_ct = 1
+    else
+      space_ct = 2
+    end
     # Input marker (gray)
     disp.set_text_color 0x808080
-    disp.draw_string "> #{display_row_number} |", 0, y_pos
+    disp.draw_string "#{' ' * space_ct}#{current_row_number} |", 0, y_pos
     code_display = "#{'  ' * indent_ct}#{current_code}_"
     draw_code_with_highlight disp, code_display, 36, y_pos
   end
@@ -431,7 +442,7 @@ indent_ct = 0
 code_lines = []  # History of code lines with {text: "", indent: 0}
 scroll_offset = 0  # How many lines scrolled
 max_visible_lines = 6  # Max lines visible in code area (35-95px, 10px per line)
-display_row_number = 1
+current_row_number = 1
 
 # M5 start
 M5.begin
@@ -442,7 +453,7 @@ disp.set_text_size 1
 
 # initial draw
 draw_static_ui(disp)
-redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, display_row_number
+redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
 
 execute_code = ''
 
@@ -453,7 +464,7 @@ loop do
   code_display = "#{code}"
 
   if code_display != prev_code_display || is_need_redraw_input
-    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, display_row_number
+    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
 
     prev_code_display = code_display
 
@@ -545,9 +556,9 @@ loop do
       code = ''
 
       # Redraw code area with scroll
-      redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, display_row_number
+      redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
 
-      display_row_number += 1
+      current_row_number += 1
 
       next
     end
@@ -568,7 +579,7 @@ loop do
       execute_code = ''
       code_lines = []
       indent_ct = 0
-      display_row_number = 1
+      current_row_number = 1
 
       next
     end
@@ -589,10 +600,10 @@ loop do
     execute_code = ''
     code_lines = []
     indent_ct = 0
-    display_row_number = 1
+    current_row_number = 1
 
     # Redraw code area (clear it)
-    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, display_row_number
+    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
 
     next
   end
@@ -653,7 +664,7 @@ loop do
       execute_code = ''
       is_ctrl = false
       is_need_redraw_input = true
-      display_row_number = 1
+      current_row_number = 1
 
       next
     end
