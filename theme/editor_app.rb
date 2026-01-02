@@ -290,50 +290,41 @@ def draw_code_with_highlight(disp, code_str, x, y)
 
   tokens = tokenize code_str
 
-  # Draw each token with appropriate color
+  # Draw each token with appropriate color (based on codedark colorscheme)
   tokens.each do |token|
     if token.length > 0 && (token[0] == "'" || token[0] == '"')
-      # String literal color (orange)
-      disp.set_text_color 0xFF9F1C
+      # String literal color (brown/orange) - codedark String
+      disp.set_text_color 0xCE9178
     elsif token.length > 0 && token[0] == ':'
-      # Symbol color (cyan) - :symbol format
-      disp.set_text_color 0x00FFFF
+      # Symbol color (blue) - codedark Constant - :symbol format
+      disp.set_text_color 0x569CD6
     elsif token.length > 1 && token[-1] == ':'
-      # Symbol color (cyan) - key: format
-      disp.set_text_color 0x00FFFF
+      # Symbol color (blue) - codedark Constant - key: format
+      disp.set_text_color 0x569CD6
     elsif token.length > 1 && token[0] == '@' && token[1] == '@'
-      # Class variable color (light orange)
-      disp.set_text_color 0xFFB366
+      # Class variable color (light blue) - codedark Identifier
+      disp.set_text_color 0x9CDCFE
     elsif token.length > 0 && token[0] == '@'
-      # Instance variable color (light cyan)
-      disp.set_text_color 0x87CEEB
+      # Instance variable color (light blue) - codedark Identifier
+      disp.set_text_color 0x9CDCFE
     elsif token.length > 0 && token[0] == '$'
-      # Global variable color (yellow)
-      disp.set_text_color 0xFFD700
+      # Global variable color (light blue) - codedark Identifier
+      disp.set_text_color 0x9CDCFE
     elsif is_number?(token)
-      # Number color (blue)
-      disp.set_text_color 0x5B9FED
-    elsif token == 'nil'
-      # nil color (dark purple)
-      disp.set_text_color 0x3A1C71
-    elsif token == 'true'
-      # true color (bright blue)
-      disp.set_text_color 0x00BFFF
-    elsif token == 'false'
-      # false color (bright purple)
-      disp.set_text_color 0xBB86FC
-    elsif token == 'self'
-      # self color (green)
-      disp.set_text_color 0x009A00
+      # Number color (light green) - codedark Number
+      disp.set_text_color 0xB5CEA8
+    elsif token == 'nil' || token == 'true' || token == 'false' || token == 'self'
+      # Pseudo variables color (blue) - codedark Constant
+      disp.set_text_color 0x569CD6
     elsif keywords.include?(token)
-      # Keyword color (pink/magenta)
-      disp.set_text_color 0xFF007C
+      # Keyword color (pink) - codedark Keyword
+      disp.set_text_color 0xC586C0
     elsif token.length > 0 && token[0] >= 'A' && token[0] <= 'Z'
-      # Capitalized words (green)
-      disp.set_text_color 0x009A00
+      # Capitalized words (blue-green) - codedark rubyConstant
+      disp.set_text_color 0x4EC9B0
     else
-      # Normal text color (white)
-      disp.set_text_color 0xF7F7FF
+      # Normal text color (white) - codedark Front
+      disp.set_text_color 0xD4D4D4
     end
 
     disp.draw_string token, x_pos, y
@@ -343,28 +334,29 @@ end
 
 # ti-doc: Draw static UI elements
 def draw_static_ui(disp)
-  # Header
-  disp.set_text_color 0xFF007C
+  # Header border (unified UI color)
+  disp.set_text_color 0x808080
   disp.draw_string '+' + '-' * 38 + '+', 0, 0
-  disp.set_text_color 0xFF007C
+  disp.set_text_color 0x808080
   disp.draw_string '| ', 0, 10
-  disp.set_text_color 0xFF9F1C
+  # Filename (unified UI color)
+  disp.set_text_color 0x808080
   disp.draw_string '/home/geek/picoruby/calc.rb', 12, 10
-  disp.set_text_color 0xFF007C
+  disp.set_text_color 0x808080
   disp.draw_string '|', 234, 10
-  disp.set_text_color 0xFF007C
+  disp.set_text_color 0x808080
   disp.draw_string '+' + '-' * 38 + '+', 0, 20
 
-  # Separator
-  disp.set_text_color 0x3A1C71
+  # Separator (unified UI color)
+  disp.set_text_color 0x808080
   disp.draw_string '_' * 40, 0, 100
 
-  # Result
-  disp.set_text_color 0xFF9F1C
+  # Result arrow (unified UI color)
+  disp.set_text_color 0x808080
   disp.draw_string '=>', 0, 110
 
-  # Footer
-  disp.set_text_color 0x3A1C71
+  # Footer (unified UI color)
+  disp.set_text_color 0x808080
   disp.draw_string '_' * 40, 0, 115
 end
 
@@ -393,12 +385,14 @@ def redraw_code_area(
 
   (start_line...total_lines).each do |i|
     line_data = code_lines[i]
-    disp.set_text_color 0xFF007C
+    # Line marker (gray)
+    disp.set_text_color 0x808080
 
     # Special marker for [RUN]
     if line_data[:text] == '[RUN]'
       disp.draw_string '*', 0, y_pos
-      disp.set_text_color 0x3A1C71
+      # [RUN] in green (comment color)
+      disp.set_text_color 0x6A9955
       disp.draw_string '[RUN]', 12, y_pos
     else
       disp.draw_string '*', 0, y_pos
@@ -410,7 +404,8 @@ def redraw_code_area(
 
   # Draw current input line
   if y_pos <= CODE_AREA_Y_END - 10
-    disp.set_text_color 0xFF007C
+    # Input marker (gray)
+    disp.set_text_color 0x808080
     disp.draw_string '>', 0, y_pos
     code_display = "#{'  ' * indent_ct}#{current_code}_"
     draw_code_with_highlight disp, code_display, 12, y_pos
@@ -473,20 +468,26 @@ loop do
     disp.fill_rect 18, 110, 222, 8, 0x000000
 
     if res.class == Integer
-      disp.set_text_color 0x5B9FED
+      # Number color (light green) - codedark Number
+      disp.set_text_color 0xB5CEA8
     elsif res.class == String
-      disp.set_text_color 0xFF9F1C
+      # String color (brown/orange) - codedark String
+      disp.set_text_color 0xCE9178
     elsif res.class == NilClass
-      disp.set_text_color 0x3A1C71
+      # Constant color (blue) - codedark Constant
+      disp.set_text_color 0x569CD6
       res = "nil"
     elsif res.class == TrueClass
-      disp.set_text_color 0x00BFFF
+      # Boolean color (blue) - codedark Boolean
+      disp.set_text_color 0x569CD6
       res = "true"
     elsif res.class == FalseClass
-      disp.set_text_color 0xBB86FC
+      # Boolean color (blue) - codedark Boolean
+      disp.set_text_color 0x569CD6
       res = "false"
     else
-      disp.set_text_color 0xF7F7FF
+      # Normal text color (white) - codedark Front
+      disp.set_text_color 0xD4D4D4
     end
 
     disp.draw_string " #{res}", 18, 110
@@ -501,7 +502,8 @@ loop do
     battery_voltage = bat_adc.read_voltage
     status_with_battery = "#{status} BAT:#{battery_voltage}V"
     disp.fill_rect 0, 125, 240, 10, 0x000000
-    disp.set_text_color 0xFF9F1C
+    # Status text (gray)
+    disp.set_text_color 0x808080
     disp.draw_string status_with_battery, 0, 125
     prev_status = status
   end
