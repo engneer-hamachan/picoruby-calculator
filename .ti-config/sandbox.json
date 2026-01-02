@@ -101,7 +101,7 @@
       "arguments": [],
       "return_type": {
         "type": [
-          "Nil"
+          "NilClass"
         ]
       },
       "document": "Suspend sandbox task"
@@ -111,7 +111,7 @@
       "arguments": [],
       "return_type": {
         "type": [
-          "Nil"
+          "NilClass"
         ]
       },
       "document": "Free parser resources (not implemented in mruby)"
@@ -153,7 +153,7 @@
       "arguments": [],
       "return_type": {
         "type": [
-          "Nil"
+          "NilClass"
         ]
       },
       "document": "Terminate sandbox task"
@@ -163,7 +163,7 @@
       "arguments": [
         {
           "type": [
-            "Nil|Int"
+            "NilClass|Int"
           ],
           "key": "timeout:"
         }
@@ -191,7 +191,7 @@
       ],
       "return_type": {
         "type": [
-          "Nil"
+          "NilClass"
         ]
       },
       "document": "Load and execute Ruby script or mruby bytecode from file. If join is true (default), waits for execution to complete."
@@ -201,7 +201,7 @@
       "arguments": [],
       "return_type": {
         "type": [
-          "Bot|Nil"
+          "Bot|NilClass"
         ]
       },
       "document": "return execute error or return nil"

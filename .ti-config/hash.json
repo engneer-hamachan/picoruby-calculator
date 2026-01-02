@@ -136,7 +136,7 @@
       "return_type": {
         "type": [
           "Unify",
-          "Nil"
+          "NilClass"
         ]
       },
       "document": "Delete specified key"
@@ -144,7 +144,7 @@
     {
       "name": "each",
       "block_parameters": [
-        "Symbol",
+        "Untyped",
         "Unify"
       ],
       "return_type": {
@@ -220,7 +220,7 @@
         "type": [
           "String",
           "Symbol",
-          "Nil"
+          "NilClass"
         ]
       }
     },
@@ -229,7 +229,7 @@
       "arguments": [],
       "return_type": {
         "type": [
-          "KeyArray"
+          "[Untyped]"
         ]
       },
       "document": "Return all keys as array"

@@ -347,6 +347,7 @@ def redraw_code_area(
  
   # Draw history lines
   y_pos = code_area_start
+
   (start_line...total_lines).each do |i|
     line_data = code_lines[i]
     disp.set_text_color 0xFF007C
@@ -431,6 +432,9 @@ loop do
       disp.set_text_color 0x5B9FED
     elsif res.class == String
       disp.set_text_color 0xFF9F1C
+    elsif res.class == NilClass
+      disp.set_text_color 0x3A1C71
+      res = "nil"
     else
       disp.set_text_color 0xF7F7FF
     end
@@ -520,7 +524,7 @@ loop do
     sandbox.execute
     sandbox.wait timeout: nil
     error = sandbox.error
-
+ 
     if error.nil?
       res = sandbox.result
     else
