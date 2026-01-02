@@ -252,6 +252,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
   keywords = [
     'def',
     'class',
+    'module',
     'end',
     'if',
     'elsif',
@@ -259,6 +260,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
     'unless',
     'case',
     'when',
+    'then',
     'while',
     'until',
     'for',
@@ -269,7 +271,21 @@ def draw_code_with_highlight(disp, code_str, x, y)
     'return',
     'yield',
     'break',
-    'next'
+    'next',
+    'redo',
+    'retry',
+    'and',
+    'or',
+    'not',
+    'super',
+    'attr_accessor',
+    'attr_reader',
+    'attr_writer',
+    'alias',
+    'undef',
+    '__FILE__',
+    '__LINE__',
+    '__ENCODING__'
   ]
 
   tokens = tokenize code_str
@@ -279,9 +295,36 @@ def draw_code_with_highlight(disp, code_str, x, y)
     if token.length > 0 && (token[0] == "'" || token[0] == '"')
       # String literal color (orange)
       disp.set_text_color 0xFF9F1C
+    elsif token.length > 0 && token[0] == ':'
+      # Symbol color (cyan) - :symbol format
+      disp.set_text_color 0x00FFFF
+    elsif token.length > 1 && token[-1] == ':'
+      # Symbol color (cyan) - key: format
+      disp.set_text_color 0x00FFFF
+    elsif token.length > 1 && token[0] == '@' && token[1] == '@'
+      # Class variable color (light orange)
+      disp.set_text_color 0xFFB366
+    elsif token.length > 0 && token[0] == '@'
+      # Instance variable color (light cyan)
+      disp.set_text_color 0x87CEEB
+    elsif token.length > 0 && token[0] == '$'
+      # Global variable color (yellow)
+      disp.set_text_color 0xFFD700
     elsif is_number?(token)
       # Number color (blue)
       disp.set_text_color 0x5B9FED
+    elsif token == 'nil'
+      # nil color (dark purple)
+      disp.set_text_color 0x3A1C71
+    elsif token == 'true'
+      # true color (bright blue)
+      disp.set_text_color 0x00BFFF
+    elsif token == 'false'
+      # false color (bright purple)
+      disp.set_text_color 0xBB86FC
+    elsif token == 'self'
+      # self color (green)
+      disp.set_text_color 0x009A00
     elsif keywords.include?(token)
       # Keyword color (pink/magenta)
       disp.set_text_color 0xFF007C
@@ -436,6 +479,12 @@ loop do
     elsif res.class == NilClass
       disp.set_text_color 0x3A1C71
       res = "nil"
+    elsif res.class == TrueClass
+      disp.set_text_color 0x00BFFF
+      res = "true"
+    elsif res.class == FalseClass
+      disp.set_text_color 0xBB86FC
+      res = "false"
     else
       disp.set_text_color 0xF7F7FF
     end
