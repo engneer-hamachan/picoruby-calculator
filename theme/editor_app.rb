@@ -211,7 +211,7 @@ def tokenize code
   current_token = ''
   in_string = false
   string_char = ''
-  token_ends = [' ', '(', ')', '{', '}', '[', ']', ',', ';', '_' , '.']
+  token_ends = [' ', '(', ')', '{', '}', '[', ']', ',', ';', '.']
 
   code.each_char do |c|
     if in_string
@@ -384,6 +384,7 @@ sandbox = Sandbox.new ''
 is_input = false
 is_shift = false
 is_fn = false
+is_ctrl = false
 is_need_redraw_input = false
 code = ''
 prev_code_display = ''
@@ -559,6 +560,12 @@ loop do
       next
     end
 
+    if key_input == 'ctrl'
+      is_ctrl = !is_ctrl
+      
+      next
+    end
+
     if key_input == 'del'
       code = code[0..-2]
       is_shift = false
@@ -583,6 +590,24 @@ loop do
       else
         code << key_input
       end
+
+      next
+    end
+
+    if is_ctrl && key_input == 'd'
+      code = ''
+      code_lines = []
+      indent_ct = 0
+      execute_code = ''
+      is_ctrl = false
+      is_need_redraw_input = true
+
+      next
+    end
+
+    if is_ctrl && key_input == 'c'
+      code = ''
+      is_ctrl = false
 
       next
     end
