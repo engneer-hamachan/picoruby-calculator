@@ -284,7 +284,6 @@ def draw_code_with_highlight(disp, code_str, x, y)
 
   tokens = tokenize code_str
 
-  # Draw each token with appropriate color
   tokens.each do |token|
     if token.length > 0 && (token[0] == "'" || token[0] == '"')
       # String literal color (brown/orange)
@@ -370,7 +369,7 @@ def redraw_code_area(
   # Clear code area
   disp.fill_rect 0, code_area_start, 240, code_area_height, 0x000000
 
-  # Calculate which lines to show (reserve 1 line for input)
+  # Calculate which lines to show
   total_lines = code_lines.length
   max_history_lines = max_visible_lines - 1
   start_line = [0, total_lines - max_history_lines].max
@@ -380,38 +379,32 @@ def redraw_code_area(
 
   (start_line...total_lines).each do |i|
     line_data = code_lines[i]
-    # Line marker (gray)
+  
     disp.set_text_color 0x808080
     line_number = i + 1
 
+    # Calculate left space
     if line_number > 9
       space_ct = 1
     else
       space_ct = 2
     end
 
-    # Special marker for [RUN]
-    if line_data[:text] == '[RUN]'
-      disp.draw_string "#{' ' * space_ct}#{line_number} |", 0, y_pos
-      # [RUN] in green (comment color)
-      disp.set_text_color 0x6A9955
-      disp.draw_string '[RUN]', 36, y_pos
-    else
-      disp.draw_string "#{' ' * space_ct}#{line_number} |", 0, y_pos
-      draw_code_with_highlight disp, "#{'  ' * line_data[:indent]}#{line_data[:text]}", 36, y_pos
-    end
+    disp.draw_string "#{' ' * space_ct}#{line_number} |", 0, y_pos
+    draw_code_with_highlight disp, "#{'  ' * line_data[:indent]}#{line_data[:text]}", 36, y_pos
 
     y_pos += 10
   end
 
   # Draw current input line
   if y_pos <= CODE_AREA_Y_END - 10
+    # Calculate left space
     if current_row_number > 9
       space_ct = 1
     else
       space_ct = 2
     end
-    # Input marker (gray)
+
     disp.set_text_color 0x808080
     disp.draw_string "#{' ' * space_ct}#{current_row_number} |", 0, y_pos
     code_display = "#{'  ' * indent_ct}#{current_code}_"
@@ -435,8 +428,6 @@ code = ''
 prev_code_display = ''
 res = ''
 prev_res = ''
-code_executed = ''
-prev_code_executed = ''
 prev_status = ''
 indent_ct = 0
 code_lines = []  # History of code lines with {text: "", indent: 0}
@@ -472,36 +463,25 @@ loop do
   end
 
   # draw result area
-  if res.to_s != prev_res || code_executed.to_s != prev_code_executed
+  if res.to_s != prev_res 
     disp.fill_rect 18, 110, 222, 8, 0x000000
 
-    if res.class == Integer
-      # Number color (light green) - codedark Number
+    if res.class == Integer || res.class == Float
       disp.set_text_color 0xB5CEA8
     elsif res.class == String
-      # String color (brown/orange) - codedark String
       disp.set_text_color 0xCE9178
     elsif res.class == NilClass
-      # Constant color (blue) - codedark Constant
       disp.set_text_color 0x569CD6
       res = "nil"
-    elsif res.class == TrueClass
-      # Boolean color (blue) - codedark Boolean
+    elsif res.class == TrueClass || res.class == FalseClass
       disp.set_text_color 0x569CD6
-      res = "true"
-    elsif res.class == FalseClass
-      # Boolean color (blue) - codedark Boolean
-      disp.set_text_color 0x569CD6
-      res = "false"
     else
-      # Normal text color (white) - codedark Front
       disp.set_text_color 0xD4D4D4
     end
 
     disp.draw_string "#{res}", 18, 110
 
     prev_res = res.to_s
-    prev_code_executed = code_executed.to_s
   end
 
   # draw status area
@@ -510,7 +490,6 @@ loop do
     battery_voltage = bat_adc.read_voltage
     status_with_battery = "#{status} BAT:#{battery_voltage}V"
     disp.fill_rect 0, 125, 240, 10, 0x000000
-    # Status text (gray)
     disp.set_text_color 0x808080
     disp.draw_string status_with_battery, 0, 125
     prev_status = status
@@ -527,7 +506,7 @@ loop do
     if !is_shift && code != ''
       tokens = tokenize code
 
-      # Adjust indent before adding to history
+      # Calculate minus indent
       target_tokens = ['end', 'else', 'elsif', 'when']
 
       tokens.each do |token|
@@ -540,12 +519,11 @@ loop do
         end
       end
 
-      # Add line to history
       code_lines << {text: code, indent: indent_ct}
 
       target_tokens = ['class', 'def', 'if', 'elsif', 'else', 'do', 'case', 'when']
 
-      # Adjust indent for next line
+      # Calculate plus indent
       tokens.each do |token|
         if target_tokens.include? token
           indent_ct = indent_ct + 1
@@ -555,7 +533,6 @@ loop do
 
       code = ''
 
-      # Redraw code area with scroll
       redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
 
       current_row_number += 1
@@ -563,14 +540,8 @@ loop do
       next
     end
 
-    if code == ''
-      # Add [RUN] marker to history
-      code_lines << {text: '[RUN]', indent: 0}
-    end
-
     is_shift = false
 
-    code_executed = execute_code
     res = ''
 
     unless sandbox.compile "_ = (#{execute_code})", remove_lv: true
@@ -602,7 +573,6 @@ loop do
     indent_ct = 0
     current_row_number = 1
 
-    # Redraw code area (clear it)
     redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
 
     next
@@ -648,11 +618,7 @@ loop do
       key_input = FN_TABLE[key_input]
       is_fn = false
 
-      if key_input == 'up'
-        code = prev_code_executed
-      else
-        code << key_input
-      end
+      code << key_input
 
       next
     end
