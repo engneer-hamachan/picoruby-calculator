@@ -92,6 +92,16 @@ A vibrant theme with hot magenta and neon orange - retro arcade energy!
 
 **[Cyber Retro Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/cyber_retro_preview.html)**
 
+### 📝 Editor Theme
+A professional code editor theme with full syntax highlighting and line numbers.
+
+**[Editor Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/editor_preview.html)**
+
+**Features:**
+- Line numbers with auto-alignment
+- Full Ruby syntax highlighting (keywords, strings, numbers, variables, etc.)
+- Multi-line input support with auto-indentation
+
 ### 📋 Default Theme
 A clean, classic terminal-style interface with standard colors.
 
@@ -100,6 +110,7 @@ A clean, classic terminal-style interface with standard colors.
 make list-themes                    # List available themes
 make apply-theme THEME=cyber_retro  # Apply cyber retro theme
 make apply-theme THEME=sakura       # Apply sakura theme
+make apply-theme THEME=editor       # Apply editor theme
 make apply-theme THEME=default      # Apply default theme
 ```
 

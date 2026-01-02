@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor Theme Preview - PicoRuby Calculator</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      font-family: 'Courier New', monospace;
+      padding: 40px;
+      line-height: 1.4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #569CD6;
+      margin-bottom: 30px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .preview-box {
+      background-color: #000000;
+      padding: 10px;
+      border: 3px solid #808080;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .display {
+      background-color: #000000;
+      font-size: 13px;
+      white-space: pre;
+      line-height: 1.3;
+    }
+    .color-palette {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .color-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+      background-color: #0a0a0a;
+      border-radius: 8px;
+    }
+    .color-box {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .color-info {
+      flex: 1;
+    }
+    .color-code {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    .color-name {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Editor Theme Preview</h1>
+
+    <div class="preview-box">
+      <div class="display"><span style="color: #808080">+--------------------------------------+</span>
+<span style="color: #808080">| </span><span style="color: #808080">/home/geek/picoruby/calc.rb</span>          <span style="color: #808080">|</span>
+<span style="color: #808080">+--------------------------------------+</span>
+
+<span style="color: #808080"> 1 |</span><span style="color: #C586C0">def</span> <span style="color: #D4D4D4">factorial</span><span style="color: #D4D4D4">(</span><span style="color: #D4D4D4">n</span><span style="color: #D4D4D4">)</span>
+<span style="color: #808080"> 2 |</span>  <span style="color: #C586C0">return</span> <span style="color: #B5CEA8">1</span> <span style="color: #C586C0">if</span> <span style="color: #D4D4D4">n</span> <span style="color: #D4D4D4">&lt;=</span> <span style="color: #B5CEA8">1</span>
+<span style="color: #808080"> 3 |</span>  <span style="color: #D4D4D4">n</span> <span style="color: #D4D4D4">*</span> <span style="color: #D4D4D4">factorial</span><span style="color: #D4D4D4">(</span><span style="color: #D4D4D4">n</span><span style="color: #D4D4D4">-</span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">)</span>
+<span style="color: #808080"> 4 |</span><span style="color: #C586C0">end</span>
+<span style="color: #808080"> 5 |</span>_
+
+<span style="color: #808080">----------------------------------------</span>
+<span style="color: #808080">=&gt;</span> <span style="color: #569CD6">nil</span>
+<span style="color: #808080">----------------------------------------</span>
+<span style="color: #808080">[ NORMAL ] BAT:4.2V</span></div>
+    </div>
+
+    <h2 style="color: #569CD6;">Color Palette</h2>
+    <div class="color-palette">
+      <div class="color-item">
+        <div class="color-box" style="background-color: #C586C0;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #C586C0;">#C586C0</div>
+          <div class="color-name">Pink<br>Keywords (def, class, if, return, etc.)</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #CE9178;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #CE9178;">#CE9178</div>
+          <div class="color-name">Brown/Orange<br>String literals</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #B5CEA8;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #B5CEA8;">#B5CEA8</div>
+          <div class="color-name">Light Green<br>Numbers</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #569CD6;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #569CD6;">#569CD6</div>
+          <div class="color-name">Blue<br>Constants (nil, true, false, self), Symbols</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #9CDCFE;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #9CDCFE;">#9CDCFE</div>
+          <div class="color-name">Light Blue<br>Instance/Class/Global variables (@var, @@var, $var)</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #4EC9B0;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #4EC9B0;">#4EC9B0</div>
+          <div class="color-name">Teal<br>Class names (capitalized words)</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #6A9955;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #6A9955;">#6A9955</div>
+          <div class="color-name">Green<br>Comments</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #D4D4D4;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #D4D4D4;">#D4D4D4</div>
+          <div class="color-name">White<br>Normal text</div>
+        </div>
+      </div>
+      <div class="color-item">
+        <div class="color-box" style="background-color: #808080;"></div>
+        <div class="color-info">
+          <div class="color-code" style="color: #808080;">#808080</div>
+          <div class="color-name">Gray<br>UI elements (borders, line numbers, status)</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background-color: #0a0a0a; border-left: 4px solid #569CD6;">
+      <h3 style="color: #569CD6; margin-top: 0;">About This Theme</h3>
+      <p style="color: #D4D4D4; line-height: 1.6;">
+        <strong style="color: #569CD6;">Professional Code Editor</strong> - A code editor theme with full syntax highlighting support.
+        Features line numbers, multi-line input with auto-indentation, and intelligent syntax coloring for Ruby code.
+        The theme provides excellent readability and a comfortable coding experience.
+        Perfect for writing and testing complex Ruby code with proper visual feedback.
+      </p>
+      <h4 style="color: #9CDCFE; margin-top: 20px;">Features</h4>
+      <ul style="color: #D4D4D4; line-height: 1.8;">
+        <li>📝 <strong style="color: #C586C0;">Line Numbers</strong> - Track your code position easily</li>
+        <li>🎨 <strong style="color: #CE9178;">Syntax Highlighting</strong> - Full Ruby syntax support</li>
+        <li>↔️ <strong style="color: #B5CEA8;">Auto-Indentation</strong> - Automatic code formatting</li>
+        <li>📚 <strong style="color: #569CD6;">Multi-line Support</strong> - Write complex methods and classes</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
