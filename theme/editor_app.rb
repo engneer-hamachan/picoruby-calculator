@@ -141,8 +141,8 @@ PATTERN =
     [1, 1, 1]
   ]
 
-CODE_AREA_Y_START = 35
-CODE_AREA_Y_END = 100
+CODE_AREA_Y_START = 31
+CODE_AREA_Y_END = 101
 # constants definition end
 
 # ti-doc: read keyboard input
@@ -442,9 +442,9 @@ res = ''
 prev_res = ''
 prev_status = ''
 indent_ct = 0
-code_lines = []  # History of code lines with {text: "", indent: 0}
-scroll_offset = 0  # How many lines scrolled
-max_visible_lines = 6  # Max lines visible in code area (35-95px, 10px per line)
+code_lines = []
+scroll_offset = 0
+max_visible_lines = 7
 current_row_number = 1
 
 # M5 start
