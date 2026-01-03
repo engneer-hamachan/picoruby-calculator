@@ -95,6 +95,8 @@ A vibrant theme with hot magenta and neon orange - retro arcade energy!
 ### 📝 Editor Theme
 A professional code editor theme with full syntax highlighting and line numbers.
 
+![Editor Theme](image/editor-theme.png)
+
 **[Editor Theme Page →](https://engneer-hamachan.github.io/picoruby-calculator/editor_preview.html)**
 
 **Features:**
