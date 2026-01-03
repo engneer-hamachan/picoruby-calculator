@@ -2,7 +2,7 @@ require 'm5unified'
 require 'gpio'
 require 'adc'
 
-# Constants definition start
+# constants definition start
 COL3 = GPIO.new(3, GPIO::IN)
 COL4 = GPIO.new(4, GPIO::IN)
 COL5 = GPIO.new(5, GPIO::IN)
@@ -143,9 +143,9 @@ PATTERN =
 
 CODE_AREA_Y_START = 35
 CODE_AREA_Y_END = 100
-# Constants definition end
+# constants definition end
 
-# ti-doc: Read keyboard input
+# ti-doc: read keyboard input
 def get_input
   PATTERN.each do |pat|
     ROW8.write pat[0]
@@ -194,7 +194,7 @@ def get_input
 end
 
 
-# ti-doc: Check if a string is a number
+# ti-doc: check if a string is a number
 def is_number?(str)
   return false if str == ''
   str.each_char do |c|
@@ -204,7 +204,7 @@ def is_number?(str)
   true
 end
 
-# ti-doc: Split code into tokens
+# ti-doc: split code into tokens
 def tokenize code
   tokens = []
   current_token = ''
@@ -245,7 +245,7 @@ def tokenize code
   tokens
 end
 
-# ti-doc: Draw code with syntax highlighting
+# ti-doc: draw code with syntax highlighting
 def draw_code_with_highlight(disp, code_str, x, y)
   x_pos = x
   keywords = [
@@ -286,37 +286,37 @@ def draw_code_with_highlight(disp, code_str, x, y)
 
   tokens.each do |token|
     if token.length > 0 && (token[0] == "'" || token[0] == '"')
-      # String literal color (brown/orange)
+      # string literal color (brown/orange)
       disp.set_text_color 0xCE9178
     elsif token.length > 0 && token[0] == ':'
-      # Symbol color (blue)
+      # symbol color (blue)
       disp.set_text_color 0x569CD6
     elsif token.length > 1 && token[-1] == ':'
-      # Symbol color (blue)
+      # symbol color (blue)
       disp.set_text_color 0x569CD6
     elsif token.length > 1 && token[0] == '@' && token[1] == '@'
-      # Class variable color (light blue)
+      # class variable color (light blue)
       disp.set_text_color 0x9CDCFE
     elsif token.length > 0 && token[0] == '@'
-      # Instance variable color (light blue)
+      # instance variable color (light blue)
       disp.set_text_color 0x9CDCFE
     elsif token.length > 0 && token[0] == '$'
-      # Global variable color (light blue)
+      # global variable color (light blue)
       disp.set_text_color 0x9CDCFE
     elsif is_number?(token)
-      # Number color (light green)
+      # number color (light green)
       disp.set_text_color 0xB5CEA8
     elsif token == 'nil' || token == 'true' || token == 'false' || token == 'self'
-      # Pseudo variables color (blue)
+      # pseudo variables color (blue)
       disp.set_text_color 0x569CD6
     elsif keywords.include?(token)
-      # Keyword color (pink)
+      # keyword color (pink)
       disp.set_text_color 0xC586C0
     elsif token.length > 0 && token[0] >= 'A' && token[0] <= 'Z'
-      # Capitalized words (blue-green)
+      # capitalized words (blue-green)
       disp.set_text_color 0x4EC9B0
     else
-      # Normal text color (white) 
+      # normal text color (white) 
       disp.set_text_color 0xD4D4D4
     end
 
@@ -325,14 +325,14 @@ def draw_code_with_highlight(disp, code_str, x, y)
   end
 end
 
-# ti-doc: Draw static UI elements
+# ti-doc: draw static UI elements
 def draw_static_ui(disp)
-  # Header border
+  # header border
   disp.set_text_color 0x808080
   disp.draw_string '+' + '-' * 38 + '+', 0, 0
   disp.set_text_color 0x808080
   disp.draw_string '| ', 0, 10
-  # Filename
+  # filename
   disp.set_text_color 0x808080
   disp.draw_string '/home/geek/picoruby/calc.rb', 12, 10
   disp.set_text_color 0x808080
@@ -340,20 +340,20 @@ def draw_static_ui(disp)
   disp.set_text_color 0x808080
   disp.draw_string '+' + '-' * 38 + '+', 0, 20
 
-  # Separator
+  # separator
   disp.set_text_color 0x808080
   disp.draw_string '_' * 40, 0, 100
 
-  # Result
+  # result
   disp.set_text_color 0x808080
   disp.draw_string '=>', 0, 110
 
-  # Footer
+  # footer
   disp.set_text_color 0x808080
   disp.draw_string '_' * 40, 0, 115
 end
 
-# ti-doc: Redraw code area with scroll offset
+# ti-doc: redraw code area with scroll offset
 def redraw_code_area(
   disp,
   code_lines,
@@ -366,15 +366,15 @@ def redraw_code_area(
   code_area_start = CODE_AREA_Y_START
   code_area_height = CODE_AREA_Y_END - CODE_AREA_Y_START
 
-  # Clear code area
+  # clear code area
   disp.fill_rect 0, code_area_start, 240, code_area_height, 0x000000
 
-  # Calculate which lines to show
+  # calculate which lines to show
   total_lines = code_lines.length
   max_history_lines = max_visible_lines - 1
   start_line = [0, total_lines - max_history_lines].max
  
-  # Draw history lines
+  # draw history lines
   y_pos = code_area_start
 
   (start_line...total_lines).each do |i|
@@ -383,7 +383,7 @@ def redraw_code_area(
     disp.set_text_color 0x808080
     line_number = i + 1
 
-    # Calculate left space
+    # calculate left space
     if line_number > 9
       space_ct = 1
     else
@@ -396,9 +396,9 @@ def redraw_code_area(
     y_pos += 10
   end
 
-  # Draw current input line
+  # draw current input line
   if y_pos <= CODE_AREA_Y_END - 10
-    # Calculate left space
+    # calculate left space
     if current_row_number > 9
       space_ct = 1
     else
@@ -506,7 +506,7 @@ loop do
     if !is_shift && code != ''
       tokens = tokenize code
 
-      # Calculate minus indent
+      # calculate minus indent
       target_tokens = ['end', 'else', 'elsif', 'when']
 
       tokens.each do |token|
@@ -521,11 +521,16 @@ loop do
 
       code_lines << {text: code, indent: indent_ct}
 
-      target_tokens = ['class', 'def', 'if', 'elsif', 'else', 'do', 'case', 'when']
+      target_tokens = ['class', 'def', 'if', 'unless', 'elsif', 'else', 'do', 'case', 'when']
 
-      # Calculate plus indent
-      tokens.each do |token|
+      # calculate plus indent
+      tokens.each_with_index do |token, idx|
         if target_tokens.include? token
+          # case example: return x if x
+          if ['if', 'unless'].include?(token) && idx > 0
+            next
+          end
+
           indent_ct = indent_ct + 1
           break
         end
