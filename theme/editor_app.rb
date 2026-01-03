@@ -419,8 +419,10 @@ def redraw_code_area(
 
     disp.set_text_color 0x808080
     disp.draw_string "#{' ' * space_ct}#{current_row_number} |", 0, y_pos
-    code_display = "#{'  ' * indent_ct}#{current_code}_"
+    code_display = "#{'  ' * indent_ct}#{current_code}"
     draw_code_with_highlight disp, code_display, 36, y_pos
+    disp.set_text_color 0xD4D4D4
+    disp.draw_string '_', 36 + (code_display.length * 6), y_pos
   end
 end
 
