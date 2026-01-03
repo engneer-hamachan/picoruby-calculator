@@ -283,6 +283,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
   ]
 
   tokens = tokenize code_str
+  is_def = false
 
   tokens.each do |token|
     if token.length > 0 && (token[0] == "'" || token[0] == '"')
@@ -309,12 +310,23 @@ def draw_code_with_highlight(disp, code_str, x, y)
     elsif token == 'nil' || token == 'true' || token == 'false' || token == 'self'
       # pseudo variables color (blue)
       disp.set_text_color 0x569CD6
+    elsif token == 'def'
+      is_def = true
+      # keyword color (pink)
+      disp.set_text_color 0xC586C0
     elsif keywords.include?(token)
       # keyword color (pink)
       disp.set_text_color 0xC586C0
     elsif token.length > 0 && token[0] >= 'A' && token[0] <= 'Z'
       # capitalized words (blue-green)
       disp.set_text_color 0x4EC9B0
+    elsif token == ' ' || token == '.'
+      # normal text color (white) 
+      disp.set_text_color 0xD4D4D4
+    elsif is_def
+      # method name color (yellow) 
+      disp.set_text_color 0xFFFCDA
+      is_def = false
     else
       # normal text color (white) 
       disp.set_text_color 0xD4D4D4
