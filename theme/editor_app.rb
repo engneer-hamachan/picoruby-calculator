@@ -90,7 +90,7 @@ SHIFT_TABLE['='] = '+'
 SHIFT_TABLE['['] = '{'
 SHIFT_TABLE[']'] = '}'
 SHIFT_TABLE[';'] = ':'
-SHIFT_TABLE["'"] = "'"
+SHIFT_TABLE["'"] = "\""
 SHIFT_TABLE[','] = '<'
 SHIFT_TABLE['.'] = '>'
 SHIFT_TABLE['/'] = '?'
