@@ -307,7 +307,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
     elsif is_number?(token)
       # number color (light green)
       disp.set_text_color 0xB5CEA8
-    elsif token == 'nil' || token == 'true' || token == 'false' || token == 'self'
+    elsif ['nil', 'true', 'false', 'self'].include?(token)
       # pseudo variables color (blue)
       disp.set_text_color 0x569CD6
     elsif token == 'def'
@@ -448,6 +448,7 @@ code_lines = []
 scroll_offset = 0
 max_visible_lines = 7
 current_row_number = 1
+execute_code = ''
 
 # M5 start
 M5.begin
@@ -458,9 +459,16 @@ disp.set_text_size 1
 
 # initial draw
 draw_static_ui(disp)
-redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
+redraw_code_area(
+  disp,
+  code_lines,
+  scroll_offset,
+  max_visible_lines,
+  code,
+  indent_ct,
+  current_row_number
+)
 
-execute_code = ''
 
 loop do
   M5.update
@@ -469,7 +477,15 @@ loop do
   code_display = "#{code}"
 
   if code_display != prev_code_display || is_need_redraw_input
-    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
+    redraw_code_area(
+      disp,
+      code_lines,
+      scroll_offset,
+      max_visible_lines,
+      code,
+      indent_ct,
+      current_row_number
+    )
 
     prev_code_display = code_display
 
@@ -535,9 +551,21 @@ loop do
 
       code_lines << {text: code, indent: indent_ct}
 
-      target_tokens = ['class', 'def', 'if', 'unless', 'elsif', 'else', 'do', 'case', 'when']
 
       # calculate plus indent
+      target_tokens = [
+        'class',
+        'module',
+        'def',
+        'if',
+        'unless',
+        'elsif',
+        'else',
+        'do',
+        'case',
+        'when'
+      ]
+
       tokens.each_with_index do |token, idx|
         if target_tokens.include? token
           # case example: return x if x
@@ -552,7 +580,15 @@ loop do
 
       code = ''
 
-      redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
+      redraw_code_area(
+        disp,
+        code_lines,
+        scroll_offset,
+        max_visible_lines,
+        code,
+        indent_ct,
+        current_row_number
+      )
 
       current_row_number += 1
 
@@ -592,7 +628,15 @@ loop do
     indent_ct = 0
     current_row_number = 1
 
-    redraw_code_area disp, code_lines, scroll_offset, max_visible_lines, code, indent_ct, current_row_number
+    redraw_code_area(
+      disp,
+      code_lines,
+      scroll_offset,
+      max_visible_lines,
+      code,
+      indent_ct,
+      current_row_number
+    )
 
     next
   end
