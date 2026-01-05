@@ -246,8 +246,7 @@ def tokenize code
 end
 
 # ti-doc: draw code with syntax highlighting
-def draw_code_with_highlight(disp, code_str, x, y)
-  x_pos = x
+def draw_code_with_highlight(disp, code_str, x_pos, y_pos)
   keywords = [
     'def',
     'class',
@@ -332,7 +331,7 @@ def draw_code_with_highlight(disp, code_str, x, y)
       disp.set_text_color 0xD4D4D4
     end
 
-    disp.draw_string token, x_pos, y
+    disp.draw_string token, x_pos, y_pos
     x_pos += token.length * 6
   end
 end
