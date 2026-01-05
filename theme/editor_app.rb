@@ -565,16 +565,8 @@ loop do
         'when'
       ]
 
-      tokens.each_with_index do |token, idx|
-        if target_tokens.include? token
-          # case example: return x if x
-          if ['if', 'unless'].include?(token) && idx > 0
-            next
-          end
-
-          indent_ct = indent_ct + 1
-          break
-        end
+      if tokens.length > 0 && target_tokens.include?(tokens[0])
+        indent_ct = indent_ct + 1
       end
 
       code = ''
