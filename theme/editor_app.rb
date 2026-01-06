@@ -145,6 +145,7 @@ CODE_AREA_Y_START = 31
 CODE_AREA_Y_END = 101
 
 DICT = {}
+CURRENT_COMPLETION_TARGET = nil
 # constants definition end
 
 # ti-doc: read keyboard input
@@ -450,21 +451,6 @@ def redraw_code_area(
     disp.draw_string "#{' ' * space_ct}#{line_number} |", 0, y_pos
     draw_code_with_highlight disp, "#{'  ' * line_data[:indent]}#{line_data[:text]}", 36, y_pos
 
-    # append completion dict item
-    tokens = tokenize line_data[:text]
-    is_def = false
-    ignore_tokens = ['self', '.', ' ', ',', '(', ')']
-
-    tokens.each_with_index do |token, idx|
-      if token == 'def' || (token == 'class' && idx == 0) || (token == 'module' && idx == 0)
-        is_def = true
-        next
-      end
-
-      if is_def && DICT[token].nil? && !ignore_tokens.include?(token)
-        DICT[token] = true
-      end
-    end
 
     y_pos += 10
   end
@@ -674,6 +660,24 @@ loop do
       res = sandbox.result
     else
       res = error.to_s
+    end
+
+    # append completion dict item
+    code_lines.each do |line|
+      tokens = tokenize line[:text]
+      is_def = false
+      ignore_tokens = ['self', '.', ' ', ',', '(', ')']
+
+      tokens.each_with_index do |token, idx|
+        if token == 'def' || (token == 'class' && idx == 0) || (token == 'module' && idx == 0)
+          is_def = true
+          next
+        end
+
+        if is_def && DICT[token].nil? && !ignore_tokens.include?(token)
+          DICT[token] = true
+        end
+      end
     end
 
     sandbox.suspend
