@@ -17,7 +17,7 @@ ROW11 = GPIO.new(11, GPIO::OUT)
 
 KEYS = {}
 KEYS['13001'] = 'ctrl'
-KEYS['13000'] = 'ept'
+KEYS['13000'] = 'opt'
 KEYS['15001'] = 'alt'
 KEYS['15000'] = 'z'
 KEYS['3001'] = 'x'
@@ -750,10 +750,6 @@ loop do
       next
     end
 
-    if ['alt', 'opt', 'up', 'down', 'left', 'right'].include? key_input
-      next
-    end
-
     if key_input == 'fn'
       is_fn = !is_fn
       
@@ -806,6 +802,10 @@ loop do
       code = ''
       is_ctrl = false
 
+      next
+    end
+
+    if ['alt', 'opt'].include? key_input
       next
     end
       
