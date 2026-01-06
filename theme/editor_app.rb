@@ -145,7 +145,6 @@ CODE_AREA_Y_START = 31
 CODE_AREA_Y_END = 101
 
 DICT = {}
-$completion_chars = nil
 # constants definition end
 
 # ti-doc: read keyboard input
@@ -377,12 +376,10 @@ def draw_completion disp, current_code
 
   # find matching completions
   candidates = []
+
   DICT.keys.each do |key|
     if key.length > target_code.length && key[0, target_code.length] == target_code
       candidates << key
-      unless $completion_chars
-        $completion_chars = key[target_code.length, key.length] 
-      end
     end
   end
 
@@ -390,6 +387,7 @@ def draw_completion disp, current_code
 
   # limit to 3 candidates
   candidates = candidates[0, 3]
+  $completion_chars = candidates[0][target_code.length, candidates[0].length] 
 
   # draw completion box
   padding = 2
@@ -504,6 +502,7 @@ scroll_offset = 0
 max_visible_lines = 7
 current_row_number = 1
 execute_code = ''
+$completion_chars = nil
 
 # M5 start
 M5.begin
@@ -582,11 +581,12 @@ loop do
 
   key_input = get_input
 
-  if key_input == 'tab'
+  if key_input == 'tab' && !is_input
     is_input = true
 
     if $completion_chars.is_a?(String)
       code = code + $completion_chars
+      next
     end
   end
 
