@@ -386,19 +386,27 @@ def draw_completion disp, current_code
   candidates = candidates[0, 3]
 
   # draw completion box
-  box_x = 148
-  box_y = 41
-  box_width = 90
-  box_height = candidates.length * 10
+  padding = 2
+  box_x = 118 - padding
+  box_y = 41 - padding
+  box_width = 90 + (padding * 2)
+  box_height = (candidates.length * 10) + (padding * 2)
 
   # draw background
-  disp.fill_rect box_x, box_y, box_width, box_height, 0x1E1E1E
+  disp.fill_rect box_x, box_y, box_width, box_height, 0x0A0A0A
+
+  # draw border using fast line functions
+  border_color = 0xD4D4D4
+  disp.draw_fast_h_line box_x, box_y, box_width, border_color
+  disp.draw_fast_h_line box_x, box_y + box_height - 1, box_width, border_color
+  disp.draw_fast_v_line box_x, box_y, box_height, border_color
+  disp.draw_fast_v_line box_x + box_width - 1, box_y, box_height, border_color
 
   # draw candidates
   candidates.each_with_index do |candidate, idx|
-    y_pos = box_y + (idx * 10)
+    y_pos = box_y + (padding + 1) + (idx * 10)
     disp.set_text_color 0xFFFCDA
-    disp.draw_string candidate, box_x + 4, y_pos
+    disp.draw_string candidate, box_x + 4 + padding, y_pos
   end
 end
 
@@ -463,7 +471,6 @@ def redraw_code_area(
 
   # completion
   draw_completion disp, current_code
-
 
   # draw current input line
   if y_pos <= CODE_AREA_Y_END - 10
