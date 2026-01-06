@@ -409,7 +409,13 @@ def draw_completion disp, current_code
   # draw candidates
   candidates.each_with_index do |candidate, idx|
     y_pos = box_y + (padding + 1) + (idx * 10)
-    disp.set_text_color 0xFFFCDA
+
+    if candidate[0] >= 'A' && candidate[0] <= 'Z'
+      disp.set_text_color 0x4EC9B0
+    else
+      disp.set_text_color 0xFFFCDA
+    end
+
     disp.draw_string candidate, box_x + 4 + padding, y_pos
   end
 end
