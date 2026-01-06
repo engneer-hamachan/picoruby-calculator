@@ -686,18 +686,38 @@ loop do
     code_lines.each do |line|
       tokens = tokenize line[:text]
       is_def = false
+      is_attr_reader = false
       ignore_tokens = ['self', '.', ' ', ',', '(', ')']
+      define_tokens = ['def', 'class', 'module']
+      attr_tokens = ['attr_accessor', 'attr_reader', 'attr_writer']
 
       tokens.each_with_index do |token, idx|
-        if token == 'def' || (token == 'class' && idx == 0) || (token == 'module' && idx == 0)
+        if define_tokens.include?(token) && idx == 0
           is_def = true
           next
         end
 
+        if attr_tokens.include?(token) && idx == 0
+          is_attr_reader = true
+          next
+        end
+
         if is_def && DICT[token].nil? && !ignore_tokens.include?(token)
+          if token == 'initialize'
+            token = 'new'
+          end
+
           DICT[token] = true
+          is_def = false
+        end
+
+        if is_attr_reader && !ignore_tokens.include?(token) && DICT[token[1, token.length]].nil?
+          DICT[token[1, token.length]] = true
         end
       end
+
+      is_def = false
+      is_attr_reader = false
     end
 
     sandbox.suspend
@@ -727,6 +747,10 @@ loop do
     if key_input == 'shift'
       is_shift = !is_shift
 
+      next
+    end
+
+    if ['alt', 'opt', 'up', 'down', 'left', 'right'].include? key_input
       next
     end
 
