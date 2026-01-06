@@ -145,7 +145,7 @@ CODE_AREA_Y_START = 31
 CODE_AREA_Y_END = 101
 
 DICT = {}
-CURRENT_COMPLETION_TARGET = nil
+$completion_chars = nil
 # constants definition end
 
 # ti-doc: read keyboard input
@@ -368,6 +368,8 @@ def draw_static_ui(disp)
 end
 
 def draw_completion disp, current_code
+  $completion_chars = nil
+
   return if current_code == ''
 
   tokens = tokenize current_code
@@ -378,6 +380,9 @@ def draw_completion disp, current_code
   DICT.keys.each do |key|
     if key.length > target_code.length && key[0, target_code.length] == target_code
       candidates << key
+      unless $completion_chars
+        $completion_chars = key[target_code.length, key.length] 
+      end
     end
   end
 
@@ -576,6 +581,14 @@ loop do
   end
 
   key_input = get_input
+
+  if key_input == 'tab'
+    is_input = true
+
+    if $completion_chars.is_a?(String)
+      code = code + $completion_chars
+    end
+  end
 
   if key_input == 'ret' && (code != '' || execute_code != '') && !is_input
     is_input = true
