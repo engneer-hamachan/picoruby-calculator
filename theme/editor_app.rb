@@ -366,6 +366,7 @@ def draw_static_ui(disp)
   disp.draw_string '_' * 40, 0, 115
 end
 
+# ti-doc: search and draw completion candidates
 def draw_completion disp, current_code
   $completion_chars = nil
 
@@ -396,10 +397,10 @@ def draw_completion disp, current_code
   box_width = 90 + (padding * 2)
   box_height = (candidates.length * 10) + (padding * 2)
 
-  # draw background
+  # draw completion box background
   disp.fill_rect box_x, box_y, box_width, box_height, 0x0A0A0A
 
-  # draw border using fast line functions
+  # draw border
   border_color = 0xD4D4D4
   disp.draw_fast_h_line box_x, box_y, box_width, border_color
   disp.draw_fast_h_line box_x, box_y + box_height - 1, box_width, border_color
