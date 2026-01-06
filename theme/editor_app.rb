@@ -393,7 +393,7 @@ def draw_completion disp, current_code
   # draw completion box
   padding = 2
   box_x = 118 - padding
-  box_y = 41 - padding
+  box_y = 51 - padding
   box_width = 90 + (padding * 2)
   box_height = (candidates.length * 10) + (padding * 2)
 
