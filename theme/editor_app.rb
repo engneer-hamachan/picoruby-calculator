@@ -143,6 +143,8 @@ PATTERN =
 
 CODE_AREA_Y_START = 31
 CODE_AREA_Y_END = 101
+
+DICT = {}
 # constants definition end
 
 # ti-doc: read keyboard input
@@ -364,6 +366,39 @@ def draw_static_ui(disp)
   disp.draw_string '_' * 40, 0, 115
 end
 
+def draw_completion disp, current_code
+  return if current_code == ''
+
+  # find matching completions
+  candidates = []
+  DICT.keys.each do |key|
+    if key.length > current_code.length && key[0, current_code.length] == current_code
+      candidates << key
+    end
+  end
+
+  return if candidates.length == 0
+
+  # limit to 3 candidates
+  candidates = candidates[0, 3]
+
+  # draw completion box
+  box_x = 148
+  box_y = 41
+  box_width = 90
+  box_height = candidates.length * 10
+
+  # draw background
+  disp.fill_rect box_x, box_y, box_width, box_height, 0x1E1E1E
+
+  # draw candidates
+  candidates.each_with_index do |candidate, idx|
+    y_pos = box_y + (idx * 10)
+    disp.set_text_color 0xFFFCDA
+    disp.draw_string candidate, box_x + 4, y_pos
+  end
+end
+
 # ti-doc: redraw code area with scroll offset
 def redraw_code_area(
   disp,
@@ -404,8 +439,28 @@ def redraw_code_area(
     disp.draw_string "#{' ' * space_ct}#{line_number} |", 0, y_pos
     draw_code_with_highlight disp, "#{'  ' * line_data[:indent]}#{line_data[:text]}", 36, y_pos
 
+    # append completion dict item
+    tokens = tokenize line_data[:text]
+    is_def = false
+    ignore_tokens = ['self', '.', ' ', ',', '(', ')']
+
+    tokens.each_with_index do |token, idx|
+      if token == 'def' || (token == 'class' && idx == 0) || (token == 'module' && idx == 0)
+        is_def = true
+        next
+      end
+
+      if is_def && DICT[token].nil? && !ignore_tokens.include?(token)
+        DICT[token] = true
+      end
+    end
+
     y_pos += 10
   end
+
+  # completion
+  draw_completion disp, current_code
+
 
   # draw current input line
   if y_pos <= CODE_AREA_Y_END - 10
