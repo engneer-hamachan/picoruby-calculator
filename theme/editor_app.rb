@@ -369,10 +369,13 @@ end
 def draw_completion disp, current_code
   return if current_code == ''
 
+  tokens = tokenize current_code
+  target_code = tokens.last
+
   # find matching completions
   candidates = []
   DICT.keys.each do |key|
-    if key.length > current_code.length && key[0, current_code.length] == current_code
+    if key.length > target_code.length && key[0, target_code.length] == target_code
       candidates << key
     end
   end
