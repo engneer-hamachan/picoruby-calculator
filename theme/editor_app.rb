@@ -821,9 +821,13 @@ loop do
       if key_input == 'up' && code_lines.length > 0
         code_lines = code_lines[0, code_lines.length - 1]
         execute_code = ''
+        indent_ct = 0
+
         code_lines.each do |line|
           execute_code << line[:text].to_s + "\n" 
+          indent_ct = line[:indent]
         end
+
         is_need_redraw_input = true
         next
       end
