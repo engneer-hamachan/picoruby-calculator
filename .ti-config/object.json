@@ -6,7 +6,7 @@
   ],
   "instance_methods": [
     {
-      "name": "<=>",
+      "name": "\u003c=\u003e",
       "arguments": [
         {
           "type": [
@@ -83,7 +83,8 @@
         "type": [
           "NilClass"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "attr_reader",
@@ -99,7 +100,8 @@
         "type": [
           "NilClass"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "block_given?",
@@ -108,7 +110,8 @@
         "type": [
           "Bool"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "class",
@@ -143,7 +146,8 @@
         "type": [
           "NilClass"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "include",
@@ -158,7 +162,8 @@
         "type": [
           "NilClass"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "inspect",
@@ -196,7 +201,8 @@
         "type": [
           "NilClass"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "nil?",
@@ -221,7 +227,8 @@
         "type": [
           "NilClass"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "public",
@@ -236,7 +243,8 @@
         "type": [
           "NilClass"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "raise",
@@ -256,7 +264,8 @@
         "type": [
           "Bot"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "relinquish",
@@ -265,7 +274,8 @@
         "type": [
           "Bool"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "sleep",
@@ -280,7 +290,8 @@
         "type": [
           "Int"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "sleep_ms",
@@ -295,7 +306,8 @@
         "type": [
           "Int"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "sprintf",
@@ -316,7 +328,8 @@
         "type": [
           "String"
         ]
-      }
+      },
+      "document": ""
     },
     {
       "name": "to_s",
@@ -328,5 +341,19 @@
       },
       "document": "Return string representation"
     }
-  ]
+  ],
+  "class_methods": [
+    {
+      "name": "constants",
+      "arguments": [],
+      "return_type": {
+        "type": [
+          "[Symbol]"
+        ]
+      },
+      "document": ""
+    }
+  ],
+  "constants": null
 }
+

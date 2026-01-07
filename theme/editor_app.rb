@@ -144,7 +144,36 @@ PATTERN =
 CODE_AREA_Y_START = 31
 CODE_AREA_Y_END = 101
 
-DICT = {}
+$dict = {}
+$dict['def'] = true
+$dict['class'] = true
+$dict['module'] = true
+$dict['if'] = true
+$dict['end'] = true
+$dict['elsif'] = true
+$dict['else'] = true
+$dict['unless'] = true
+$dict['while'] = true
+$dict['until'] = true
+$dict['for'] = true
+$dict['case'] = true
+$dict['when'] = true
+$dict['then'] = true
+$dict['yield'] = true
+$dict['next'] = true
+$dict['break'] = true
+$dict['return'] = true
+$dict['true'] = true
+$dict['false'] = true
+$dict['nil'] = true
+$dict['and'] = true
+$dict['or'] = true
+$dict['not'] = true
+
+Object.constants.each do |constant|
+  $dict[constant.to_s] = true
+end
+
 # constants definition end
 
 # ti-doc: read keyboard input
@@ -377,7 +406,7 @@ def draw_completion disp, current_code
   # find matching completions
   candidates = []
 
-  DICT.keys.each do |key|
+  $dict.keys.each do |key|
     if key.length > target_code.length && key[0, target_code.length] == target_code
       candidates << key
     end
@@ -490,9 +519,9 @@ def redraw_code_area(
 
     tokens.each_with_index do |token, idx|
       if token == 'class' && idx == 0
-        DICT['attr_reader'] = true
-        DICT['attr_accessor'] = true
-        DICT['initialize'] = true
+        $dict['attr_reader'] = true
+        $dict['attr_accessor'] = true
+        $dict['initialize'] = true
         break
       end
     end
@@ -707,7 +736,7 @@ loop do
       tokens.each_with_index do |token, idx|
         if define_tokens.include?(token) && idx == 0
           if token == 'class'
-            DICT['new'] = true
+            $dict['new'] = true
           end
 
           is_def = true
@@ -719,13 +748,13 @@ loop do
           next
         end
 
-        if is_def && !DICT[token] && !ignore_tokens.include?(token) && token != 'initialize'
-          DICT[token] = true
+        if is_def && !$dict[token] && !ignore_tokens.include?(token) && token != 'initialize'
+          $dict[token] = true
           is_def = false
         end
 
-        if is_attr_reader && !ignore_tokens.include?(token) && !DICT[token[1, token.length]]
-          DICT[token[1, token.length]] = true
+        if is_attr_reader && !ignore_tokens.include?(token) && !$dict[token[1, token.length]]
+          $dict[token[1, token.length]] = true
         end
       end
 
@@ -734,9 +763,9 @@ loop do
     end
 
     # remove tmp dict item
-    DICT.delete 'attr_reader'
-    DICT.delete 'attr_accessor'
-    DICT.delete 'initialize'
+    $dict.delete 'attr_reader'
+    $dict.delete 'attr_accessor'
+    $dict.delete 'initialize'
 
     sandbox.suspend
 
