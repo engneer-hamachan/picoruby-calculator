@@ -182,7 +182,12 @@ internal_constants = [
 
 Object.constants.each do |constant|
   constant_str = constant.to_s
-  $dict[constant_str] = true unless internal_constants.include?(constant_str)
+
+  if internal_constants.include?(constant_str) || constant_str.index('Error') != nil
+    next
+  end
+
+  $dict[constant_str] = true 
 end
 
 # ti-doc: read keyboard input
