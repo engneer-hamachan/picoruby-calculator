@@ -3,7 +3,7 @@ require 'gpio'
 require 'adc'
 
 # constants definition start
-COL3 = GPIO.new(3, GPIO::IN)
+COL3 = GPIO.new(3, GPIO::IN) 
 COL4 = GPIO.new(4, GPIO::IN)
 COL5 = GPIO.new(5, GPIO::IN)
 COL6 = GPIO.new(6, GPIO::IN)
@@ -12,7 +12,7 @@ COL13 = GPIO.new(13, GPIO::IN)
 COL15 = GPIO.new(15, GPIO::IN)
 
 ROW8 = GPIO.new(8, GPIO::OUT)
-ROW9 = GPIO.new(9, GPIO::OUT)
+ROW9 = GPIO.new(9, GPIO::OUT) 
 ROW11 = GPIO.new(11, GPIO::OUT)
 
 KEYS = {}
@@ -817,6 +817,16 @@ loop do
     if is_fn
       key_input = FN_TABLE[key_input]
       is_fn = false
+
+      if key_input == 'up' && code_lines.length > 0
+        code_lines = code_lines[0, code_lines.length - 1]
+        execute_code = ''
+        code_lines.each do |line|
+          execute_code << line[:text].to_s + "\n" 
+        end
+        is_need_redraw_input = true
+        next
+      end
 
       code << key_input
 
