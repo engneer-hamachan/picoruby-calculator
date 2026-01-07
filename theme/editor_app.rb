@@ -668,8 +668,11 @@ loop do
         'for'
       ]
 
-      if tokens.length > 0 && target_tokens.include?(tokens[0])
-        indent_ct = indent_ct + 1
+      tokens.each_with_index do |token, idx|
+        if (target_tokens.include?(token) && idx == 0) || (token == 'do')
+          indent_ct = indent_ct + 1
+          break
+        end
       end
 
       code = ''
@@ -826,6 +829,8 @@ loop do
         code_lines.each do |line|
           execute_code << line[:text].to_s + "\n" 
         end
+
+        current_row_number -= 1
 
         is_need_redraw_input = true
         next
