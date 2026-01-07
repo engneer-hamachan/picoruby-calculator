@@ -484,6 +484,21 @@ def redraw_code_area(
     disp.set_text_color 0xD4D4D4
     disp.draw_string '_', 36 + (code_display.length * 6), y_pos
   end
+
+  # append dict for class define
+  code_lines.each do |line|
+    tokens = tokenize line[:text]
+
+    tokens.each_with_index do |token, idx|
+      if token == 'class' && idx == 0
+        DICT['attr_reader'] = true
+        DICT['attr_accessor'] = true
+        DICT['attr_writer'] = true
+        DICT['initialize'] = true
+        break
+      end
+    end
+  end
 end
 
 # define adc object for battery display
@@ -693,6 +708,10 @@ loop do
 
       tokens.each_with_index do |token, idx|
         if define_tokens.include?(token) && idx == 0
+          if token == 'class'
+            DICT['new'] = true
+          end
+
           is_def = true
           next
         end
@@ -702,16 +721,12 @@ loop do
           next
         end
 
-        if is_def && DICT[token].nil? && !ignore_tokens.include?(token)
-          if token == 'initialize'
-            token = 'new'
-          end
-
+        if is_def && !DICT[token] && !ignore_tokens.include?(token) && token != 'initialize'
           DICT[token] = true
           is_def = false
         end
 
-        if is_attr_reader && !ignore_tokens.include?(token) && DICT[token[1, token.length]].nil?
+        if is_attr_reader && !ignore_tokens.include?(token) && !DICT[token[1, token.length]]
           DICT[token[1, token.length]] = true
         end
       end
@@ -719,6 +734,12 @@ loop do
       is_def = false
       is_attr_reader = false
     end
+
+    # remove tmp dict item
+    DICT.delete 'attr_reader'
+    DICT.delete 'attr_accessor'
+    DICT.delete 'attr_writer'
+    DICT.delete 'initialize'
 
     sandbox.suspend
 
