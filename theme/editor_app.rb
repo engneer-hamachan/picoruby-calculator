@@ -143,7 +143,33 @@ PATTERN =
 
 CODE_AREA_Y_START = 31
 CODE_AREA_Y_END = 101
+# constants definition end
 
+
+# define adc object for battery display
+bat_adc = ADC.new(10)
+
+# define mruby execution sandbox
+sandbox = Sandbox.new ''
+
+# define statements
+is_input = false
+is_shift = false
+is_fn = false
+is_ctrl = false
+is_need_redraw_input = false
+code = ''
+prev_code_display = ''
+res = ''
+prev_res = ''
+prev_status = ''
+indent_ct = 0
+code_lines = []
+scroll_offset = 0
+max_visible_lines = 7
+current_row_number = 1
+execute_code = ''
+$completion_chars = nil
 $dict = {}
 $dict['def'] = true
 $dict['class'] = true
@@ -158,7 +184,6 @@ $dict['until'] = true
 $dict['for'] = true
 $dict['case'] = true
 $dict['when'] = true
-$dict['then'] = true
 $dict['yield'] = true
 $dict['next'] = true
 $dict['break'] = true
@@ -170,11 +195,18 @@ $dict['and'] = true
 $dict['or'] = true
 $dict['not'] = true
 
-Object.constants.each do |constant|
-  $dict[constant.to_s] = true
-end
+# exclude internal constants 
+internal_constants = [
+  'COL3', 'COL4', 'COL5', 'COL6', 'COL7', 'COL13', 'COL15',
+  'ROW8', 'ROW9', 'ROW11',
+  'KEYS', 'SHIFT_TABLE', 'FN_TABLE', 'PATTERN',
+  'CODE_AREA_Y_START', 'CODE_AREA_Y_END'
+]
 
-# constants definition end
+Object.constants.each do |constant|
+  constant_str = constant.to_s
+  $dict[constant_str] = true unless internal_constants.include?(constant_str)
+end
 
 # ti-doc: read keyboard input
 def get_input
@@ -528,31 +560,6 @@ def redraw_code_area(
   end
 end
 
-# define adc object for battery display
-bat_adc = ADC.new(10)
-
-# define mruby execution sandbox
-sandbox = Sandbox.new ''
-
-# define statements
-is_input = false
-is_shift = false
-is_fn = false
-is_ctrl = false
-is_need_redraw_input = false
-code = ''
-prev_code_display = ''
-res = ''
-prev_res = ''
-prev_status = ''
-indent_ct = 0
-code_lines = []
-scroll_offset = 0
-max_visible_lines = 7
-current_row_number = 1
-execute_code = ''
-$completion_chars = nil
-
 # M5 start
 M5.begin
 
@@ -571,7 +578,6 @@ redraw_code_area(
   indent_ct,
   current_row_number
 )
-
 
 loop do
   M5.update
@@ -663,7 +669,6 @@ loop do
 
       code_lines << {text: code, indent: indent_ct}
 
-
       # calculate plus indent
       target_tokens = [
         'class',
@@ -675,7 +680,10 @@ loop do
         'else',
         'do',
         'case',
-        'when'
+        'when',
+        'while',
+        'until',
+        'for'
       ]
 
       if tokens.length > 0 && target_tokens.include?(tokens[0])
