@@ -279,7 +279,6 @@ def draw_code_with_highlight(disp, code_str, x_pos, y_pos)
     'super',
     'attr_accessor',
     'attr_reader',
-    'attr_writer',
     'alias'
   ]
 
@@ -493,7 +492,6 @@ def redraw_code_area(
       if token == 'class' && idx == 0
         DICT['attr_reader'] = true
         DICT['attr_accessor'] = true
-        DICT['attr_writer'] = true
         DICT['initialize'] = true
         break
       end
@@ -704,7 +702,7 @@ loop do
       is_attr_reader = false
       ignore_tokens = ['self', '.', ' ', ',', '(', ')']
       define_tokens = ['def', 'class', 'module']
-      attr_tokens = ['attr_accessor', 'attr_reader', 'attr_writer']
+      attr_tokens = ['attr_accessor', 'attr_reader']
 
       tokens.each_with_index do |token, idx|
         if define_tokens.include?(token) && idx == 0
@@ -738,7 +736,6 @@ loop do
     # remove tmp dict item
     DICT.delete 'attr_reader'
     DICT.delete 'attr_accessor'
-    DICT.delete 'attr_writer'
     DICT.delete 'initialize'
 
     sandbox.suspend
