@@ -158,9 +158,12 @@ is_shift = false
 is_fn = false
 is_ctrl = false
 is_need_redraw_input = false
+is_need_redraw_result = false
 code = ''
 prev_code_display = ''
 res = ''
+display_res = ''
+result_display_offset = 0
 prev_res = ''
 prev_status = ''
 indent_ct = 0
@@ -584,7 +587,7 @@ loop do
   end
 
   # draw result area
-  if res.to_s != prev_res 
+  if res.to_s != prev_res || is_need_redraw_result
     disp.fill_rect 18, 110, 222, 8, 0x000000
 
     if res.class == Integer || res.class == Float
@@ -593,16 +596,17 @@ loop do
       disp.set_text_color 0xCE9178
     elsif res.class == NilClass
       disp.set_text_color 0x569CD6
-      res = "nil"
+      display_res = "nil"
     elsif res.class == TrueClass || res.class == FalseClass
       disp.set_text_color 0x569CD6
     else
       disp.set_text_color 0xD4D4D4
     end
 
-    disp.draw_string "#{res}", 18, 110
+    disp.draw_string "#{display_res[result_display_offset..]}", 18, 110
 
     prev_res = res.to_s
+    is_need_redraw_result = false
   end
 
   # draw status area
@@ -695,9 +699,11 @@ loop do
     is_shift = false
 
     res = ''
+    display_res = ''
 
     unless sandbox.compile "_ = (#{execute_code})", remove_lv: true
       res = 'syntax error'
+      display_res = 'syntax error'
       code = ''
       execute_code = ''
       code_lines = []
@@ -716,6 +722,8 @@ loop do
     else
       res = error.to_s
     end
+
+    display_res = res.to_s
 
     # append completion dict item
     code_lines.each do |line|
@@ -767,6 +775,7 @@ loop do
     code_lines = []
     indent_ct = 0
     current_row_number = 1
+    result_display_offset = 0
 
     redraw_code_area(
       disp,
@@ -820,6 +829,34 @@ loop do
     if is_fn
       key_input = FN_TABLE[key_input]
       is_fn = false
+
+      if key_input.nil?
+        key_input = ''
+        next
+      end
+
+      if key_input == 'right'
+        check_offset = result_display_offset + 37
+        if display_res.length >= check_offset
+          result_display_offset += 37
+          is_need_redraw_result = true
+        end
+        
+        next
+      end
+
+      if key_input == 'left'
+        check_offset = result_display_offset - 37
+        if 0 <= check_offset
+          result_display_offset -= 37
+        else
+          result_display_offset = 0
+        end
+
+        is_need_redraw_result = true
+        
+        next
+      end
 
       if key_input == 'up' && code_lines.length > 0
         indent_ct = code_lines[code_lines.length - 1][:indent]
