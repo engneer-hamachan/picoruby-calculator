@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PicoRuby Calculator - Put Ruby in Your Pocket and Go Out!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      font-family: 'Courier New', monospace;
+      line-height: 1.6;
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(255, 182, 193, 0.5),
+                     0 0 20px rgba(255, 182, 193, 0.3),
+                     0 0 30px rgba(255, 182, 193, 0.2);
+      }
+      50% {
+        text-shadow: 0 0 20px rgba(255, 182, 193, 0.8),
+                     0 0 30px rgba(255, 182, 193, 0.6),
+                     0 0 40px rgba(255, 182, 193, 0.4);
+      }
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+      background-size: 400% 400%;
+      animation: gradient-shift 15s ease infinite;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 159, 28, 0.2) 0%, transparent 50%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 4em;
+      margin-bottom: 20px;
+      animation: pulse-glow 3s ease-in-out infinite;
+      font-weight: bold;
+    }
+
+    .tagline {
+      font-size: 2.2em;
+      margin-bottom: 15px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      font-size: 1.3em;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+
+    .hero-image {
+      max-width: 600px;
+      width: 100%;
+      margin: 30px auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 50px;
+      background: linear-gradient(45deg, #FFB6C1, #FF007C, #FF9F1C);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
+    }
+
+    .theme-card {
+      background-color: #1a1a1a;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .theme-card.sakura { border-color: #FFB6C1; }
+    .theme-card.sakura:hover { box-shadow: 0 15px 40px rgba(255, 182, 193, 0.4); }
+
+    .theme-card.cyber { border-color: #FF9F1C; }
+    .theme-card.cyber:hover { box-shadow: 0 15px 40px rgba(255, 159, 28, 0.4); }
+
+    .theme-card.editor { border-color: #569CD6; }
+    .theme-card.editor:hover { box-shadow: 0 15px 40px rgba(86, 156, 214, 0.4); }
+
+    .theme-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-content {
+      padding: 25px;
+    }
+
+    .theme-icon {
+      font-size: 3em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .theme-name {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .theme-description {
+      font-size: 1em;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .features-section {
+      background-color: #1a1a1a;
+      padding: 60px 40px;
+      border-radius: 20px;
+      border: 3px solid #FFB6C1;
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .feature-item {
+      background-color: #0a0a0a;
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:nth-child(1) { border-left-color: #FFB6C1; }
+    .feature-item:nth-child(2) { border-left-color: #FF007C; }
+    .feature-item:nth-child(3) { border-left-color: #FF9F1C; }
+    .feature-item:nth-child(4) { border-left-color: #569CD6; }
+    .feature-item:nth-child(5) { border-left-color: #C586C0; }
+    .feature-item:nth-child(6) { border-left-color: #4EC9B0; }
+
+    .feature-item:hover {
+      transform: translateX(10px);
+      background-color: #141414;
+    }
+
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .feature-description {
+      font-size: 1em;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+
+    .cta-title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(45deg, #FF007C, #FF9F1C);
+      color: white;
+      padding: 18px 50px;
+      border-radius: 50px;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: scale(1.1) translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 0, 124, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #1a1a1a;
+      border-top: 2px solid #333;
+    }
+
+    footer p {
+      font-size: 1.1em;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      .tagline {
+        font-size: 1.5em;
+      }
+
+      .subtitle {
+        font-size: 1em;
+      }
+
+      .section-title {
+        font-size: 2em;
+      }
+
+      .themes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <h1>💎 PicoRuby Calculator 💎</h1>
+      <div class="tagline">Put Ruby in Your Pocket and Go Out!</div>
+      <div class="subtitle">Real Ruby Running on Tiny ESP32 Devices</div>
+      <img src="../image/main.jpg" alt="PicoRuby Calculator Device" class="hero-image">
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">🎨 Choose Your Adventure 🎨</h2>
+
+    <div class="themes-grid">
+      <a href="sakura_preview.html" class="theme-card sakura">
+        <img src="../image/sakura-theme.png" alt="Sakura Theme" class="theme-image">
+        <div class="theme-content">
+          <span class="theme-icon">🌸</span>
+          <div class="theme-name">Sakura</div>
+          <div class="theme-description">
+            Elegant Japanese-inspired theme with soft cherry blossom colors.
+            Perfect for peaceful coding sessions with a touch of zen beauty.
+          </div>
+        </div>
+      </a>
+
+      <a href="cyber_retro_preview.html" class="theme-card cyber">
+        <img src="../image/cyber-retro-theme.png" alt="Cyber Retro Theme" class="theme-image">
+        <div class="theme-content">
+          <span class="theme-icon">🌐</span>
+          <div class="theme-name">Cyber Retro</div>
+          <div class="theme-description">
+            Nostalgic 80s arcade vibes meet futuristic cyberpunk aesthetics.
+            Neon-lit streets in a digital world!
+          </div>
+        </div>
+      </a>
+
+      <a href="editor_preview.html" class="theme-card editor">
+        <img src="../image/editor-theme.png" alt="Editor Theme" class="theme-image">
+        <div class="theme-content">
+          <span class="theme-icon">📝</span>
+          <div class="theme-name">Editor</div>
+          <div class="theme-description">
+            Professional code editor with full syntax highlighting.
+            Line numbers, auto-indentation, and intelligent code completion!
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="features-section">
+      <h2 class="section-title">✨ Powerful Features ✨</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon">💎</span>
+          <div class="feature-title">Real Ruby</div>
+          <div class="feature-description">
+            Write genuine Ruby code with PicoRuby! Full support for classes, methods, blocks, and more.
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">🔋</span>
+          <div class="feature-title">Ultra Low Power</div>
+          <div class="feature-description">
+            Runs efficiently on ESP32 microcontrollers. Battery-powered operation for hours of coding on the go!
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">🎨</span>
+          <div class="feature-title">Beautiful Themes</div>
+          <div class="feature-description">
+            Three stunning themes to choose from. Switch between Sakura, Cyber Retro, and Editor modes!
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">📱</span>
+          <div class="feature-title">Pocket-Sized</div>
+          <div class="feature-description">
+            Truly portable Ruby interpreter. Carry the power of programming in your pocket wherever you go!
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">⚡</span>
+          <div class="feature-title">Blazing Fast</div>
+          <div class="feature-description">
+            Optimized PicoRuby interpreter delivers smooth, responsive performance even on tiny hardware!
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <div class="feature-title">Easy to Use</div>
+          <div class="feature-description">
+            Intuitive interface with code completion, syntax highlighting, and helpful keyboard shortcuts!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-title">🚀 Ready to Code on the Go? 🚀</div>
+      <p style="font-size: 1.2em; margin-bottom: 10px;">
+        Experience the joy of Ruby programming anywhere, anytime!
+      </p>
+      <a href="https://github.com/engneer-hamachan/picoruby-calculator" class="cta-button">Start Coding Now!</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>💎 Powered by PicoRuby & ESP32 💎</p>
+    <p style="margin-top: 10px;">Put Ruby in Your Pocket and Go Out!</p>
+  </footer>
+</body>
+</html>
