@@ -1,3 +1,4 @@
+require 'shell'
 require 'm5unified'
 require 'gpio'
 require 'adc'
@@ -175,22 +176,24 @@ execute_code = ''
 $completion_chars = nil
 $dict = {}
 
-# exclude internal constants 
-internal_constants = [
-  'COL3', 'COL4', 'COL5', 'COL6', 'COL7', 'COL13', 'COL15',
-  'ROW8', 'ROW9', 'ROW11',
-  'KEYS', 'SHIFT_TABLE', 'FN_TABLE', 'PATTERN',
-  'CODE_AREA_Y_START', 'CODE_AREA_Y_END'
-]
+def load_constants
+  # exclude internal constants 
+  internal_constants = [
+    'COL3', 'COL4', 'COL5', 'COL6', 'COL7', 'COL13', 'COL15',
+    'ROW8', 'ROW9', 'ROW11',
+    'KEYS', 'SHIFT_TABLE', 'FN_TABLE', 'PATTERN',
+    'CODE_AREA_Y_START', 'CODE_AREA_Y_END'
+  ]
 
-Object.constants.each do |constant|
-  constant_str = constant.to_s
+  Object.constants.each do |constant|
+    constant_str = constant.to_s
 
-  if internal_constants.include?(constant_str) || constant_str.index('Error') != nil
-    next
+    if internal_constants.include?(constant_str) || constant_str.index('Error') != nil
+      next
+    end
+
+    $dict[constant_str] = true 
   end
-
-  $dict[constant_str] = true 
 end
 
 # ti-doc: read keyboard input
@@ -325,7 +328,8 @@ def draw_code_with_highlight(disp, code_str, x_pos, y_pos)
     'super',
     'attr_accessor',
     'attr_reader',
-    'alias'
+    'alias',
+    'require'
   ]
 
   tokens = tokenize code_str
@@ -432,13 +436,13 @@ def draw_completion disp, current_code
   return if candidates.length == 0
 
   # limit to 3 candidates
-  candidates = candidates[0, 3]
+  candidates = candidates[0, 5]
   $completion_chars = candidates[0][target_code.length, candidates[0].length] 
 
   # draw completion box
   padding = 2
   box_x = 118 - padding
-  box_y = 51 - padding
+  box_y = 41 - padding
   box_width = 90 + (padding * 2)
   box_height = (candidates.length * 10) + (padding * 2)
 
@@ -563,6 +567,9 @@ redraw_code_area(
   indent_ct,
   current_row_number
 )
+
+# setup dict
+load_constants
 
 loop do
   M5.update
@@ -730,7 +737,7 @@ loop do
       tokens = tokenize line[:text]
       is_def = false
       is_attr_reader = false
-      ignore_tokens = ['self', '.', ' ', ',', '(', ')']
+      ignore_tokens = ['self', '.', ' ', ',', '(', ')', 'initialize']
       define_tokens = ['def', 'class', 'module']
       attr_tokens = ['attr_accessor', 'attr_reader']
 
@@ -749,13 +756,17 @@ loop do
           next
         end
 
-        if is_def && !$dict[token] && !ignore_tokens.include?(token) && token != 'initialize'
+        if is_def && !$dict[token] && !ignore_tokens.include?(token)
           $dict[token] = true
           is_def = false
         end
 
         if is_attr_reader && !ignore_tokens.include?(token) && !$dict[token[1, token.length]]
           $dict[token[1, token.length]] = true
+        end
+
+        if token == 'require'
+          load_constants
         end
       end
 
