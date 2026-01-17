@@ -1,6 +1,7 @@
 require 'shell'
 require 'm5unified'
 require 'i2c'
+require 'gpio'
 require 'adc'
 
 #<input_code>
