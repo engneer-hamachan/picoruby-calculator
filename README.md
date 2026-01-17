@@ -4,8 +4,6 @@
 
 🚀 **Ruby REPL in your pocket!** 🎒 Write and execute Ruby code **anywhere** with this M5Stack Cardputer(ADV or v1.1)-powered handheld device! ⚡ Features real-time code execution, syntax error detection, and battery monitoring - because why should Ruby be stuck on your desktop? 🖥️❌
 
-> 📌 **Note:** This project is specifically designed for **M5Stack Cardputer** 🎮
-
 ---
 
 ## 🛠️ Setup
