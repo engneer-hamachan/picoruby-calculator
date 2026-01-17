@@ -420,7 +420,7 @@ end
 # M5 start
 M5.begin
 
-# Wait for power stabilization (critical for TCA8418 after power cycle)
+# Wait for M5 begin
 sleep 0.2
 
 # Initialize keyboard controller
