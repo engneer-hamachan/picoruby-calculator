@@ -2,9 +2,9 @@
 
 ![Calculator Demo](image/main.jpg)
 
-🚀 **Ruby REPL in your pocket!** 🎒 Write and execute Ruby code **anywhere** with this M5Stack Cardputer v1.1-powered handheld device! ⚡ Features real-time code execution, syntax error detection, and battery monitoring - because why should Ruby be stuck on your desktop? 🖥️❌
+🚀 **Ruby REPL in your pocket!** 🎒 Write and execute Ruby code **anywhere** with this M5Stack Cardputer(ADV or v1.1)-powered handheld device! ⚡ Features real-time code execution, syntax error detection, and battery monitoring - because why should Ruby be stuck on your desktop? 🖥️❌
 
-> 📌 **Note:** This project is specifically designed for **M5Stack Cardputer v1.1** 🎮
+> 📌 **Note:** This project is specifically designed for **M5Stack Cardputer** 🎮
 
 ---
 
@@ -59,8 +59,9 @@ Choose and apply a theme for your calculator:
 # List available themes
 make list-themes
 
-# Apply your chosen theme (e.g., default or cyber_retro)
-make apply-theme THEME=default
+# Apply your chosen theme with device type
+# DEVICE: adv (current model) or v1_1 (legacy Cardputer v1.1)
+make apply-theme THEME=default DEVICE=adv
 ```
 
 ### 5️⃣ Build and flash 🔥
@@ -109,11 +110,11 @@ A clean, classic terminal-style interface with standard colors.
 
 **To switch themes:**
 ```bash
-make list-themes                    # List available themes
-make apply-theme THEME=cyber_retro  # Apply cyber retro theme
-make apply-theme THEME=sakura       # Apply sakura theme
-make apply-theme THEME=editor       # Apply editor theme
-make apply-theme THEME=default      # Apply default theme
+make list-themes                              # List available themes
+make apply-theme THEME=cyber_retro DEVICE=adv # Apply cyber retro theme
+make apply-theme THEME=sakura DEVICE=adv      # Apply sakura theme
+make apply-theme THEME=editor DEVICE=adv      # Apply editor theme
+make apply-theme THEME=default DEVICE=adv     # Apply default theme
 ```
 
 ---
