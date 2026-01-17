@@ -68,6 +68,18 @@ KEYS['6110'] = '_'
 KEYS['7111'] = '='
 KEYS['7110'] = 'del'
 
+PATTERN = 
+  [
+    [0, 0, 0],
+    [0, 0, 1],
+    [0, 1, 0],
+    [0, 1, 1],
+    [1, 0, 0],
+    [1, 0, 1],
+    [1, 1, 0],
+    [1, 1, 1]
+  ]
+
 # ti-doc: initialize keyboard
 def init_keyboard
   true
@@ -121,3 +133,17 @@ def get_input
   ''
 end
 
+# internal constants
+INTERNAL_CONSTANTS = [
+  'COL3',
+  'COL4',
+  'COL5',
+  'COL6',
+  'COL7',
+  'COL13',
+  'COL15',
+  'ROW8',
+  'ROW9',
+  'ROW11', 
+  'PATTERN', 
+]

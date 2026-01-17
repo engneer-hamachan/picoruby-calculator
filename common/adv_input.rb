@@ -141,3 +141,19 @@ def get_input
     ''
   end
 end
+
+# internal constants
+INTERNAL_CONSTANTS = [
+  'KEYBOARD_I2C_ADDR',
+  'TCA8418_REG_CFG',
+  'TCA8418_REG_INT_STAT',
+  'TCA8418_KEY_EVENT_A',
+  'TCA8418_REG_KP_GPIO1',
+  'TCA8418_REG_KP_GPIO2',
+  'TCA8418_REG_KP_GPIO3',
+  'TCA8418_CFG_AI',
+  'TCA8418_CFG_KE_IEN',
+  'I2C_SDA_PIN', 
+  'I2C_SCL_PIN', 
+  'KEYBOARD_I2C',
+]
