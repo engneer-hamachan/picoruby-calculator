@@ -1,3 +1,3 @@
 {
-  "preload": ["common/adv_input.rb"]
+  "preload": ["hardware_adapters/adv_input.rb"]
 }

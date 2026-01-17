@@ -3,7 +3,7 @@ require 'm5unified'
 require 'i2c'
 require 'adc'
 
-#{input_code}
+#<input_code>
 
 # constants definition start
 INTERNAL_CONSTANTS << 'KEYS'
