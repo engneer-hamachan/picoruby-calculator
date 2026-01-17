@@ -1,7 +1,9 @@
 require 'shell'
 require 'm5unified'
-require 'gpio'
+require 'i2c'
 require 'adc'
+
+#{input_code}
 
 # constants definition start
 SHIFT_TABLE = {}
@@ -16,7 +18,7 @@ SHIFT_TABLE['7'] = '&'
 SHIFT_TABLE['8'] = '*'
 SHIFT_TABLE['9'] = '('
 SHIFT_TABLE['0'] = ')'
-SHIFT_TABLE['_'] = '-'
+SHIFT_TABLE['-'] = '_'
 SHIFT_TABLE['='] = '+'
 SHIFT_TABLE['['] = '{'
 SHIFT_TABLE[']'] = '}'
@@ -58,24 +60,10 @@ FN_TABLE[';'] = 'up'
 FN_TABLE['.'] = 'down'
 FN_TABLE[','] = 'left'
 FN_TABLE['/'] = 'right'
-FN_TABLE['/'] = 'right'
-
-PATTERN = 
-  [
-    [0, 0, 0],
-    [0, 0, 1],
-    [0, 1, 0],
-    [0, 1, 1],
-    [1, 0, 0],
-    [1, 0, 1],
-    [1, 1, 0],
-    [1, 1, 1]
-  ]
 
 CODE_AREA_Y_START = 31
 CODE_AREA_Y_END = 101
 # constants definition end
-
 
 # define adc object for battery display
 bat_adc = ADC.new(10)
@@ -107,12 +95,25 @@ $completion_chars = nil
 $dict = {}
 
 def load_constants
-  # exclude internal constants 
+  # exclude internal constants
   internal_constants = [
-    'COL3', 'COL4', 'COL5', 'COL6', 'COL7', 'COL13', 'COL15',
-    'ROW8', 'ROW9', 'ROW11',
-    'KEYS', 'SHIFT_TABLE', 'FN_TABLE', 'PATTERN',
-    'CODE_AREA_Y_START', 'CODE_AREA_Y_END'
+    'KEYBOARD_I2C_ADDR',
+    'TCA8418_REG_CFG',
+    'TCA8418_REG_INT_STAT',
+    'TCA8418_KEY_EVENT_A',
+    'TCA8418_REG_KP_GPIO1',
+    'TCA8418_REG_KP_GPIO2',
+    'TCA8418_REG_KP_GPIO3',
+    'TCA8418_CFG_AI',
+    'TCA8418_CFG_KE_IEN',
+    'I2C_SDA_PIN', 
+    'I2C_SCL_PIN', 
+    'KEYBOARD_I2C',
+    'KEY_MAP', 
+    'SHIFT_TABLE', 
+    'FN_TABLE',
+    'CODE_AREA_Y_START', 
+    'CODE_AREA_Y_END'
   ]
 
   Object.constants.each do |constant|
@@ -125,7 +126,6 @@ def load_constants
     $dict[constant_str] = true 
   end
 end
-
 
 # ti-doc: check if a string is a number
 def is_number?(str)
@@ -434,7 +434,13 @@ end
 # M5 start
 M5.begin
 
-# setup display 
+# Wait for power stabilization (critical for TCA8418 after power cycle)
+sleep 0.2
+
+# Initialize keyboard controller
+init_keyboard
+
+# setup display
 disp = M5.Display
 disp.set_text_size 1
 
